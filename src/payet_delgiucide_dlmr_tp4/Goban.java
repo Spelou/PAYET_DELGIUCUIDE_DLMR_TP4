@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Goban {
 
     //attributs
-    String plateau[][]; //palteau de jeu
+    String plateau[][]; //plateau de jeu
 
     public Goban() {
         System.out.println("Bienvenue dans le jeu de go, création du Goban");
