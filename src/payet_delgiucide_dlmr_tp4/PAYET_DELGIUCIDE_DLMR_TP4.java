@@ -17,6 +17,7 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Bonjour l'option info!");
+        System.out.println("Bonjour c'est mon premier Git !");
     }
     
 }
