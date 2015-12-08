@@ -5,6 +5,7 @@
  */
 package payet_delgiucide_dlmr_tp4;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 /**
@@ -14,7 +15,11 @@ import java.util.Scanner;
 public class Goban {
 
     //attributs
-    String plateau[][]; //plateau de jeu
+    private Pierre[][] plateau; //plateau de jeu, matrice de pierre
+    private LinkedList listeGroupes; 
+    private int pierreMorteB;
+    private int pierreMorteN;
+    
 
     public Goban() {
         System.out.println("Bienvenue dans le jeu de go, création du Goban");
@@ -25,10 +30,13 @@ public class Goban {
         while (test) {
             System.out.println("Entrer la taille du goban (9,16,19)"); // on demande les données à l'utilisateur
             int choix = myScan.nextInt();
-            if ((choix == 9) || (choix == 16) | (choix == 19)) {
+            if ((choix == 9) || (choix == 16) || (choix == 19)) {
                 test = false; // sortie de boucle
                 //initialisation plateau
-                plateau = new String[choix][choix];
+                plateau = new Pierre[choix][choix];
+            }
+            else{
+                System.out.println("Vous n'avez pas donner une taille correcte.");
             }
         }
     }

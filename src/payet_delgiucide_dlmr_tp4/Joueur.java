@@ -10,5 +10,6 @@ package payet_delgiucide_dlmr_tp4;
  * @author Romain
  */
 public class Joueur {
+    //attributs
     
 }
