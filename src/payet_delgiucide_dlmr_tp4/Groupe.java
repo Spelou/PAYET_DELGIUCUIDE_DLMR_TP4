@@ -19,8 +19,46 @@ public class Groupe {
     private String couleur; //idem que pour celle de pierre (N ou B)
     private int nombrePierre; 
     private LinkedList<Pierre> listePierres;
+//getteurs
+    public int getNumGroupe() {
+        return numGroupe;
+    }
+
+    public int getLiberte() {
+        return liberte;
+    }
+
+    public int getEtat() {
+        return etat;
+    }
+
+    public String getCouleur() {
+        return couleur;
+    }
+
+    public int getNombrePierre() {
+        return nombrePierre;
+    }
+
+    public LinkedList<Pierre> getListePierres() {
+        return listePierres;
+    }
     
-    
-    
-    
+//setteurs sans celui de couleur (car à priori une pierre ne change pas de couleur) et sans celui du tableau (inutile)
+    public void setNumGroupe(int numGroupe) {
+        this.numGroupe = numGroupe;
+    }
+
+    public void setLiberte(int liberte) {
+        this.liberte = liberte;
+    }
+
+    public void setEtat(int etat) {
+        this.etat = etat;
+    }
+
+    public void setNombrePierre(int nombrePierre) {
+        this.nombrePierre = nombrePierre;
+    }
+
 }

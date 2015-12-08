@@ -19,6 +19,8 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
         System.out.println("Bonjour l'option info!");
         System.out.println("Bonjour c'est mon premier Git !");
         System.out.println("Salut les amis de Romain");
+        Goban gob = new Goban();
+        
     }
     
 }
