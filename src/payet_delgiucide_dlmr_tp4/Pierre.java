@@ -33,6 +33,10 @@ public class Pierre {
         return etat;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getLiberte() {
         return liberte;
     }
