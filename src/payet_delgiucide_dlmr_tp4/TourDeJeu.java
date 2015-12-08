@@ -16,7 +16,11 @@ public class TourDeJeu {
     private Joueur J1;
     private Joueur J2;
     private Goban gob;
-
+/**
+ * Constructeur
+ * créer les 2 joueur
+ * initialise le goban appelé gob...
+ */
     public TourDeJeu() {
         //création des joueurs
         String nom;
@@ -36,6 +40,9 @@ public class TourDeJeu {
         
     }
     
+    /**
+     * La partie, les joueurs jouent à tour de rôle.
+     */
     private void CestPartie(){
         System.out.println("Et que la partie commence, honneur à "+J1.getNom());
         boolean fin=false; // pour savoir si la partie et fini
