@@ -5,25 +5,32 @@
  */
 package payet_delgiucide_dlmr_tp4;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Quentin
  */
 public class Goban {
-    
+
     //attributs
     String plateau[][]; //palteau de jeu
-    
-    public Goban(){
-        System.out.println("Bienvenue dans le jeu de go");
+
+    public Goban() {
+        System.out.println("Bienvenue dans le jeu de go, création du Goban");
         //boucle de vérification
-        boolean test= true;//variable de vérification
-        while(test){
-            
+        boolean test = true;//variable de vérification
+        //scanner de récupération
+        Scanner myScan = new Scanner(System.in);
+        while (test) {
+            System.out.println("Entrer la taille du goban (9,16,19)"); // on demande les données à l'utilisateur
+            int choix = myScan.nextInt();
+            if ((choix == 9) || (choix == 16) | (choix == 19)) {
+                test = false; // sortie de boucle
+                //initialisation plateau
+                plateau = new String[choix][choix];
+            }
         }
-        
     }
-    
-    
-    
+
 }
