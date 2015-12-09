@@ -57,40 +57,43 @@ public class Goban {
 // méthode d'affichage - écrit les numéros des colonnes ainsi que ceux des lignes 
 //puis les pierres vivantes qui sont contenues dans la matrice (Noir N, bBlanc B) O sinon
     public void afficher() {
+        System.out.println("=======================================");
+        System.out.println("Affichage du plateau");
         // affichage de la première ligne tel que 0 1 .. 18
-        System.out.print("   ");
+        System.out.print("G |");
         for (int i = 0; i < taille; i++) {
-            if(i<10){
+            if (i < 10) {
                 System.out.print(i + "  ");
-            }
-            else{
+            } else {
                 System.out.print(i + " ");
             }
+        }
+        System.out.println("");
+        //affichage de tirets
+         for (int i = 0; i < (3*taille+3); i++) {
+             System.out.print("-");
         }
         System.out.println("");
 
         //affichage du numéro de ligne puis des pierre vivnates contenues dans la matrice
         for (int j = 0; j < taille; j++) {
             // affichage avec décalage
-            if(j<10){
-                System.out.print(j + "  ");
+            if (j < 10) {
+                System.out.print(j + " |");
+            } else {
+                System.out.print(j + "|");
             }
-            else{
-                System.out.print(j + " ");
-            }
-            
+
             for (int k = 0; k < taille; k++) {
-                if (plateau[j][k].getEtat()==1) {
+                if (plateau[j][k].getEtat() == 1) {
                     System.out.print(plateau[j][k].getCouleur() + "  ");
-                }
-                else
-                {
+                } else {
                     System.out.print("O  ");
                 }
             }
             System.out.println("");
         }
-
+        System.out.println("=======================================");
     }
 
 }
