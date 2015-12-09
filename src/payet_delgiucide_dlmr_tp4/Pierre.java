@@ -16,7 +16,16 @@ public class Pierre {
     private int liberte; // nombre de degré de liberté de 0 à 3
     private int numGroupe;
 //getteurs
-
+    
+    public Pierre(String color,int state,int liberty,int groupNumber){
+        this.couleur=couleur;
+        this.etat=state;
+        this.liberte=liberty;
+        this.numGroupe=groupNumber;
+    }
+    
+    
+    
     /**
      *
      * @return
@@ -75,4 +84,7 @@ public class Pierre {
         this.numGroupe = numGroupe;
     }
  
+    //méthode
+    
+    
 }
