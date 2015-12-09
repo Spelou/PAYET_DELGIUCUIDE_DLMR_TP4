@@ -38,11 +38,11 @@ public class Goban {
                 //initialisation plateau
                 plateau = new Pierre[choix][choix];
             } else {
-                System.out.println("Vous n'avez pas donner une taille correcte.");
+                System.out.println("Vous n'avez pas donné une taille correcte.");
             }
         }
         //création d'une pierre vide
-        Pierre pierreVide = new Pierre("vide", 1, 0, -1);
+        Pierre pierreVide = new Pierre("O", 1, 0, -1);
         //initialisation du terrain, on met des pierres vides partout
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) {
@@ -60,11 +60,11 @@ public class Goban {
         // affichage de la première ligne tel que 0 1 .. 18
         System.out.print("   ");
         for (int i = 0; i < taille; i++) {
-            System.out.print(i + "");
+            System.out.print(i + " ");
         }
         System.out.println("");
 
-        //affichage des 
+        //affichage du numéro de ligne puis des pierre vivnates contenues dans la matrice
         for (int j = 0; j < taille; j++) {
             System.out.print(j + " ");
             for (int k = 0; k < taille; k++) {
