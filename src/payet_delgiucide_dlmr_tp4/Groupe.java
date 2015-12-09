@@ -20,26 +20,35 @@ public class Groupe {
     private String couleur; //idem que pour celle de pierre (N ou B)
     private ArrayList<Pierre> listePierres;
 
-    public Groupe(int numGroupe, int liberte, String couleur, Pierre premierePierre) {
+    public Groupe(int numGroupe, String couleur, Pierre premierePierre) {
         this.numGroupe = numGroupe;
-        this.liberte = liberte;
+        this.liberte = premierePierre.getLiberte();
         this.etat = 1;
         this.couleur = couleur;
         
         listePierres = new ArrayList<Pierre>();
         listePierres.add(premierePierre);
+        liberte+=premierePierre.getLiberte();  // mise à jour des libertés du groupe 
     }
 
     public void ajouterPierre(Pierre pie) {
-        listePierres.add(pie);
+        if (pie.getCouleur().equals(this.couleur)) {
+            
+         listePierres.add(pie);
+         
+        
+          }
+        else {
+            System.out.println("Erreur: impossible d'ajouter une pierre qui n'est pas de la couleur du groupe.");
+        }
+        
     }
 
     public void fusion(Groupe g) {
         if (g.couleur.equals(this.couleur)) {
             
             liberte+=g.liberte;  // rajout des libertés du groupe à rattacher 
-            liberte-=1;  // On n'oublie pas à enlever le degré de liberté qui permet de les relier.
-            
+                        
             for (int i = 0; i < g.listePierres.size(); i++) { //On change le numéro de groupe de chaque pierre du groupe qui va être supprimé.
                 g.listePierres.get(i).setNumGroupe(this.numGroupe);
             }
