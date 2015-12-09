@@ -25,37 +25,33 @@ public class Groupe {
         this.liberte = premierePierre.getLiberte();
         this.etat = 1;
         this.couleur = couleur;
-        
+
         listePierres = new ArrayList<Pierre>();
         listePierres.add(premierePierre);
-        liberte+=premierePierre.getLiberte();  // mise à jour des libertés du groupe 
+        liberte += premierePierre.getLiberte();  // mise à jour des libertés du groupe 
     }
 
     public void ajouterPierre(Pierre pie) {
         if (pie.getCouleur().equals(this.couleur)) {
-            
-         listePierres.add(pie);
-         
-        
-          }
-        else {
+            listePierres.add(pie);      // rajout de la pierre après verification de la couleur
+            liberte += pie.getLiberte();  // mise à jour liberté du groupe
+        } else {
             System.out.println("Erreur: impossible d'ajouter une pierre qui n'est pas de la couleur du groupe.");
         }
-        
     }
 
     public void fusion(Groupe g) {
         if (g.couleur.equals(this.couleur)) {
-            
-            liberte+=g.liberte;  // rajout des libertés du groupe à rattacher 
-                        
+
+            liberte += g.liberte;  // rajout des libertés du groupe à rattacher 
+
             for (int i = 0; i < g.listePierres.size(); i++) { //On change le numéro de groupe de chaque pierre du groupe qui va être supprimé.
                 g.listePierres.get(i).setNumGroupe(this.numGroupe);
             }
             listePierres.addAll(g.listePierres); // fusion des listes de pierres des 2 groupe
 
             g = null;  //suppression du groupe en paramétre. Le garbage collector s'occupe du reste (Vive Java)
-            
+
         } else {
             System.out.println("Erreur: impossible de fusionner 2 groupes de couleurs différentes.");
         }
@@ -111,5 +107,5 @@ public class Groupe {
     public void setEtat(int etat) {
         this.etat = etat;
     }
-    
+
 }
