@@ -42,7 +42,7 @@ public class Goban {
             }
         }
         //création d'une pierre vide
-        Pierre pierreVide = new Pierre("O", 1, 0, -1);
+        Pierre pierreVide = new Pierre("O", -1, 0, -1);
         //initialisation du terrain, on met des pierres vides partout
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) {
@@ -71,7 +71,7 @@ public class Goban {
         System.out.println("");
         //affichage de tirets
          for (int i = 0; i < (3*taille+3); i++) {
-             System.out.print("-");
+            System.out.print("-");
         }
         System.out.println("");
 
@@ -85,7 +85,7 @@ public class Goban {
             }
 
             for (int k = 0; k < taille; k++) {
-                if (plateau[j][k].getEtat() == 1) {
+                if ((plateau[j][k].getEtat() == 1)||(plateau[j][k].getEtat() == -1)) {
                     System.out.print(plateau[j][k].getCouleur() + "  ");
                 } else {
                     System.out.print("O  ");
@@ -94,6 +94,31 @@ public class Goban {
             System.out.println("");
         }
         System.out.println("=======================================");
+    }
+
+// méthode qui place la pierre à l'endroit indiqué par l'utilisateur (deux entiers en paramètre) et une couleur 
+// supposés justes et qui met à jour son degré de liberté
+    public void poserPierre(int x, int y, String coul) {
+        //ajout de la pierre
+        if ((estVide(x,y))&&((coul.equals("B")||coul.equals("N")))) {
+            Pierre nouvPierre= new Pierre(coul,1,4,-1);
+            plateau[x][y]=nouvPierre;
+        }
+        else //les arguments de base sont faux
+        {
+            System.out.println("error, bad integer arguments");
+        }
+        
+
+}
+//méthode case vide qui renvoit vrai si la case est vide et faux sinon, 
+//on suppose les paramètres justes 
+    public boolean estVide(int x, int y) {
+        boolean test = true;
+        if(plateau[x][y].getEtat()==1){
+            test=false;
+        }
+        return test;
     }
 
 }

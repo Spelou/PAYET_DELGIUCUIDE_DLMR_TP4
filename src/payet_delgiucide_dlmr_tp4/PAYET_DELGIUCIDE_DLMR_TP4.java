@@ -16,7 +16,6 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Bienvenue dans le jeu de Go!");
         Goban gob = new Goban();
         gob.afficher();
     }
