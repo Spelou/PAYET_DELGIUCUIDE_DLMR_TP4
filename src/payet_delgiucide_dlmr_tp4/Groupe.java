@@ -19,6 +19,28 @@ public class Groupe {
     private String couleur; //idem que pour celle de pierre (N ou B)
     private int nombrePierre; 
     private LinkedList<Pierre> listePierres;
+
+    public Groupe(int numGroupe, int liberte, int etat, String couleur, int nombrePierre, LinkedList<Pierre> listePierres) {
+        this.numGroupe = numGroupe;
+        this.liberte = liberte;
+        this.etat = etat;
+        this.couleur = couleur;
+        this.nombrePierre = nombrePierre;
+        this.listePierres = listePierres;
+    }
+    
+    public void ajouterPierre(Pierre pie){
+        
+    }
+    public void fusion(Groupe g){
+        
+    }
+    public void calculLiberte(){
+        
+    }
+    public void changerEtat(){
+        
+    }
 //getteurs
     public int getNumGroupe() {
         return numGroupe;
