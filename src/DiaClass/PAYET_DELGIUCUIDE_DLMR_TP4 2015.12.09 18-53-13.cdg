@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="PAYET_DELGIUCUIDE_DLMR_TP4">
+  <ClassDiagramComponents>
+    <Class name="Goban" package="payet_delgiucide_dlmr_tp4" visibility="public" xPosition="494.0" yPosition="22.0">
+      <Fields>
+        <Field name="plateau" type="Pierre[][]" visibility="private"/>
+        <Field name="listeGroupes" type="LinkedList" visibility="private"/>
+        <Field name="taille" type="int" visibility="private"/>
+        <Field name="pierreMorteB" type="int" visibility="private"/>
+        <Field name="pierreMorteN" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="afficher" returnType="void" visibility="public"/>
+        <Method name="poserPierre" returnType="void" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+          <Argument type="String" name="coul"/>
+        </Method>
+        <Method name="estVide" returnType="boolean" visibility="public">
+          <Argument type="int" name="x"/>
+          <Argument type="int" name="y"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Groupe" package="payet_delgiucide_dlmr_tp4" visibility="public" xPosition="13.0" yPosition="273.0">
+      <Fields>
+        <Field name="numGroupe" type="int" visibility="private"/>
+        <Field name="liberte" type="int" visibility="private"/>
+        <Field name="etat" type="int" visibility="private"/>
+        <Field name="couleur" type="String" visibility="private"/>
+        <Field name="listePierres" type="ArrayList&lt;Pierre&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="int" name="numGroupe"/>
+          <Argument type="Pierre" name="premierePierre"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="ajouterPierre" returnType="void" visibility="public">
+          <Argument type="Pierre" name="pie"/>
+        </Method>
+        <Method name="fusion" returnType="void" visibility="public">
+          <Argument type="Groupe" name="g"/>
+        </Method>
+        <Method name="calculLiberte" returnType="void" visibility="public"/>
+        <Method name="changerEtat" returnType="void" visibility="public"/>
+        <Method name="afficherliste" returnType="void" visibility="public"/>
+        <Method name="getNumGroupe" returnType="int" visibility="public"/>
+        <Method name="getLiberte" returnType="int" visibility="public"/>
+        <Method name="getEtat" returnType="int" visibility="public"/>
+        <Method name="getCouleur" returnType="String" visibility="public"/>
+        <Method name="getListePierres" returnType="ArrayList&lt;Pierre&gt;" visibility="public"/>
+        <Method name="setNumGroupe" returnType="void" visibility="public">
+          <Argument type="int" name="numGroupe"/>
+        </Method>
+        <Method name="setLiberte" returnType="void" visibility="public">
+          <Argument type="int" name="liberte"/>
+        </Method>
+        <Method name="setEtat" returnType="void" visibility="public">
+          <Argument type="int" name="etat"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Joueur" package="payet_delgiucide_dlmr_tp4" visibility="public" xPosition="13.0" yPosition="22.0">
+      <Fields>
+        <Field name="nom" type="String" visibility="private"/>
+        <Field name="couleur" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="Nom"/>
+          <Argument type="String" name="coul"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNom" returnType="String" visibility="public"/>
+        <Method name="setNom" returnType="void" visibility="public">
+          <Argument type="String" name="Nom"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Partie" package="payet_delgiucide_dlmr_tp4" visibility="public" xPosition="267.0" yPosition="22.0">
+      <Fields>
+        <Field name="J1" type="Joueur" visibility="private"/>
+        <Field name="J2" type="Joueur" visibility="private"/>
+        <Field name="gob" type="Goban" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+      </Constructors>
+      <Methods>
+        <Method name="CestPartie" returnType="void" visibility="private"/>
+      </Methods>
+    </Class>
+    <Class name="PAYET_DELGIUCIDE_DLMR_TP4" package="payet_delgiucide_dlmr_tp4" visibility="public" xPosition="324.0" yPosition="615.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Pierre" package="payet_delgiucide_dlmr_tp4" visibility="public" xPosition="399.0" yPosition="292.0">
+      <Fields>
+        <Field name="couleur" type="String" visibility="private"/>
+        <Field name="etat" type="int" visibility="private"/>
+        <Field name="liberte" type="int" visibility="private"/>
+        <Field name="numGroupe" type="int" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="color"/>
+          <Argument type="int" name="state"/>
+          <Argument type="int" name="liberty"/>
+          <Argument type="int" name="groupNumber"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCouleur" returnType="String" visibility="public"/>
+        <Method name="getEtat" returnType="int" visibility="public"/>
+        <Method name="getLiberte" returnType="int" visibility="public"/>
+        <Method name="getNumGroupe" returnType="int" visibility="public"/>
+        <Method name="setEtat" returnType="void" visibility="public">
+          <Argument type="int" name="etat"/>
+        </Method>
+        <Method name="setLiberte" returnType="void" visibility="public">
+          <Argument type="int" name="liberte"/>
+        </Method>
+        <Method name="setNumGroupe" returnType="void" visibility="public">
+          <Argument type="int" name="numGroupe"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="payet_delgiucide_dlmr_tp4.Groupe" target="payet_delgiucide_dlmr_tp4.Groupe" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="J1" source="payet_delgiucide_dlmr_tp4.Partie" target="payet_delgiucide_dlmr_tp4.Joueur" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="J2" source="payet_delgiucide_dlmr_tp4.Partie" target="payet_delgiucide_dlmr_tp4.Joueur" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="payet_delgiucide_dlmr_tp4.Groupe" target="payet_delgiucide_dlmr_tp4.Pierre" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="gob" source="payet_delgiucide_dlmr_tp4.Partie" target="payet_delgiucide_dlmr_tp4.Goban" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="listePierres" source="payet_delgiucide_dlmr_tp4.Groupe" target="payet_delgiucide_dlmr_tp4.Pierre" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Pierre&gt;"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
