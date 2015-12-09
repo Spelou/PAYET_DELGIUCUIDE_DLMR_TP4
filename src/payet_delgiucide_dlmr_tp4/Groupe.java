@@ -25,8 +25,7 @@ public class Groupe {
         this.liberte = liberte;
         this.etat = 1;
         this.couleur = couleur;
-        nombrePierre = 1;
-
+        
         listePierres = new ArrayList<Pierre>();
         listePierres.add(premierePierre);
     }
@@ -87,10 +86,6 @@ public class Groupe {
         return couleur;
     }
 
-    public int getNombrePierre() {
-        return nombrePierre;
-    }
-
     public ArrayList<Pierre> getListePierres() {
         return listePierres;
     }
@@ -107,9 +102,5 @@ public class Groupe {
     public void setEtat(int etat) {
         this.etat = etat;
     }
-
-    public void setNombrePierre(int nombrePierre) {
-        this.nombrePierre = nombrePierre;
-    }
-
+    
 }
