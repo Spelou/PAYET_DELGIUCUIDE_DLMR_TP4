@@ -5,7 +5,7 @@
  */
 package payet_delgiucide_dlmr_tp4;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +18,7 @@ public class Groupe {
     private int etat; // ??j'sais plus
     private String couleur; //idem que pour celle de pierre (N ou B)
     private int nombrePierre; 
-    private LinkedList<Pierre> listePierres;
+    private ArrayList<Pierre> listePierres;
 
     public Groupe(int numGroupe, int liberte, String couleur, Pierre premierePierre) {
         this.numGroupe = numGroupe;
@@ -27,7 +27,7 @@ public class Groupe {
         this.couleur = couleur;
         nombrePierre = 1;
         
-        listePierres = new LinkedList<Pierre>();
+        listePierres = new ArrayList<Pierre>();
         listePierres.add(premierePierre);
     }
     
@@ -74,7 +74,7 @@ public class Groupe {
         return nombrePierre;
     }
 
-    public LinkedList<Pierre> getListePierres() {
+    public ArrayList<Pierre> getListePierres() {
         return listePierres;
     }
     
