@@ -20,27 +20,39 @@ public class Groupe {
     private int nombrePierre; 
     private LinkedList<Pierre> listePierres;
 
-    public Groupe(int numGroupe, int liberte, int etat, String couleur, int nombrePierre, LinkedList<Pierre> listePierres) {
+    public Groupe(int numGroupe, int liberte, String couleur, Pierre premierePierre) {
         this.numGroupe = numGroupe;
         this.liberte = liberte;
-        this.etat = etat;
+        this.etat = 1;
         this.couleur = couleur;
-        this.nombrePierre = nombrePierre;
-        this.listePierres = listePierres;
+        nombrePierre = 1;
+        
+        listePierres = new LinkedList<Pierre>();
+        listePierres.add(premierePierre);
     }
     
     public void ajouterPierre(Pierre pie){
+        listePierres.add(pie);
         
     }
     public void fusion(Groupe g){
+        listePierres.addAll(g.listePierres);
         
     }
     public void calculLiberte(){
+        
         
     }
     public void changerEtat(){
         
     }
+    public void afficherliste(){
+        for(int i=0;i<listePierres.size();i++) {
+         System.out.println(listePierres.get(i).getCouleur().toString());
+      }
+        
+    }
+    
 //getteurs
     public int getNumGroupe() {
         return numGroupe;
