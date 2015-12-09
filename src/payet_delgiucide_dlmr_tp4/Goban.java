@@ -5,7 +5,7 @@
  */
 package payet_delgiucide_dlmr_tp4;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,7 +16,7 @@ public class Goban {
 
     //attributs
     private Pierre[][] plateau; //plateau de jeu, matrice de pierre
-    private LinkedList listeGroupes;
+    private ArrayList listeGroupes;
     private int taille;
     private int pierreMorteB;
     private int pierreMorteN;
@@ -106,7 +106,7 @@ public class Goban {
         }
         else //les arguments de base sont faux
         {
-            System.out.println("error, bad integer arguments");
+            System.out.println("error, bad arguments in method poserPierre");
         }
         
 
@@ -120,5 +120,28 @@ public class Goban {
         }
         return test;
     }
-
+//méthode no suicide renvoit 0 si la position demandée fait le suicide d'un groupe
+//la méthode renvoit vrai si pas de suicide faux sinon
+    public boolean nonSuicide(int x,int y){
+        boolean test=true;
+        
+        return test;
+    }
+//mettre à jour groupe méthode qui prend en argument deux entiers et une couleur et qui regarde si 
+//la pierre appartient à un ancien groupe, fait la jointure de 2 groupes, ou forme un groupe seul (les paramètres sont considérés comme juste)
+    public void mettreAJourGroupe(int x,int y,String coul){
+        //pierre d'intialisation
+        Pierre nouvPierre=new Pierre(coul,1,-1,0);
+        //initialisation du groupe associé à la pierre
+        Groupe nouvGroupe=new Groupe(listeGroupes.size(),nouvPierre);
+        //il faut regarder les groupes aux alentours
+        for(int j=0;j<listeGroupes.size();j++){
+            
+        }
+        
+        
+        
+        
+    }
+    
 }
