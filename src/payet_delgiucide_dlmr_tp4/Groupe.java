@@ -20,11 +20,12 @@ public class Groupe {
     private String couleur; //idem que pour celle de pierre (N ou B)
     private ArrayList<Pierre> listePierres;
 
-    public Groupe(int numGroupe, String couleur, Pierre premierePierre) {
+    public Groupe(int numGroupe, Pierre premierePierre) {
+          
         this.numGroupe = numGroupe;
         this.liberte = premierePierre.getLiberte();
         this.etat = 1;
-        this.couleur = couleur;
+        this.couleur = premierePierre.getCouleur();;
 
         listePierres = new ArrayList<Pierre>();
         listePierres.add(premierePierre);
