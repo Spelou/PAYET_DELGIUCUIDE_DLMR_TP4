@@ -11,18 +11,20 @@ package payet_delgiucide_dlmr_tp4;
  */
 public class Joueur {
     //attributs
-    private String Nom;
+    private String nom;
+    private String couleur;
 
-    public Joueur(String Nom) {
-        this.Nom = Nom;
+    public Joueur(String Nom,String coul) {
+        this.nom = Nom;
+        this.couleur = coul;
     }
 //getters
     public String getNom() {
-        return Nom;
+        return nom;
     }
 //setters
     public void setNom(String Nom) {
-        this.Nom = Nom;
+        this.nom = Nom;
     }
     
 }
