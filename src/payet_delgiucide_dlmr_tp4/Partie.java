@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author Romain
  */
-public class TourDeJeu {
+public class Partie {
     //attributs
     private Joueur J1;
     private Joueur J2;
@@ -21,16 +21,18 @@ public class TourDeJeu {
  * créer les 2 joueur
  * initialise le goban appelé gob...
  */
-    public TourDeJeu() {
+    public Partie() {
         //création des joueurs
         String nom;
+        String couleur="N";
         Scanner scan=new Scanner(System.in);
         System.out.println("Donner le nom du joueur 1 qui commencera (avec les noirs): ");
         nom = scan.next();
-        J1=new Joueur(nom);
+        J1=new Joueur(nom,couleur);
+        couleur="B"; // la couleur passe au blanc B pour la création de l'autre joueur.
         System.out.println("Donner le nom du joueur 2 (avec les blancs): ");
         nom = scan.next();
-        J2=new Joueur(nom);
+        J2=new Joueur(nom,couleur);
         
         //création du terrain
         gob=new Goban();
@@ -46,7 +48,7 @@ public class TourDeJeu {
     private void CestPartie(){
         System.out.println("Et que la partie commence, honneur à "+J1.getNom());
         boolean fin=false; // pour savoir si la partie et fini
-        while(fin){    //1 while par tour ? la partie est finit si fin passe à true
+        while(fin){    //1 while par tour. la partie est finit si fin passe à true
             System.out.println("Où voulez vous mettre votre pierre");
             
         }
