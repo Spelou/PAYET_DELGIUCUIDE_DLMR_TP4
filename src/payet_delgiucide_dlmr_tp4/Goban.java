@@ -42,7 +42,7 @@ public class Goban {
             }
         }
         //création d'une pierre vide
-        Pierre pierreVide = new Pierre("O", 1, 0, -1);
+        Pierre pierreVide = new Pierre("O", -1, 0, -1);
         //initialisation du terrain, on met des pierres vides partout
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) {
@@ -85,7 +85,7 @@ public class Goban {
             }
 
             for (int k = 0; k < taille; k++) {
-                if (plateau[j][k].getEtat() == 1) {
+                if ((plateau[j][k].getEtat() == 1)||(plateau[j][k].getEtat() == -1)) {
                     System.out.print(plateau[j][k].getCouleur() + "  ");
                 } else {
                     System.out.print("O  ");
@@ -100,7 +100,7 @@ public class Goban {
 // supposés justes et qui met à jour son degré de liberté
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre
-        if (estVide(x,y)) {
+        if ((estVide(x,y))&&((coul.equals("B")||coul.equals("N")))) {
             Pierre nouvPierre= new Pierre(coul,1,4,-1);
             plateau[x][y]=nouvPierre;
         }
