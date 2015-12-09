@@ -18,7 +18,7 @@ public class Pierre {
 //getteurs
     
     public Pierre(String color,int state,int liberty,int groupNumber){
-        this.couleur=couleur;
+        this.couleur=color;
         this.etat=state;
         this.liberte=liberty;
         this.numGroupe=groupNumber;
