@@ -60,20 +60,32 @@ public class Goban {
         // affichage de la première ligne tel que 0 1 .. 18
         System.out.print("   ");
         for (int i = 0; i < taille; i++) {
-            System.out.print(i + " ");
+            if(i<10){
+                System.out.print(i + "  ");
+            }
+            else{
+                System.out.print(i + " ");
+            }
         }
         System.out.println("");
 
         //affichage du numéro de ligne puis des pierre vivnates contenues dans la matrice
         for (int j = 0; j < taille; j++) {
-            System.out.print(j + " ");
+            // affichage avec décalage
+            if(j<10){
+                System.out.print(j + "  ");
+            }
+            else{
+                System.out.print(j + " ");
+            }
+            
             for (int k = 0; k < taille; k++) {
                 if (plateau[j][k].getEtat()==1) {
-                    System.out.print(plateau[j][k].getCouleur() + " ");
+                    System.out.print(plateau[j][k].getCouleur() + "  ");
                 }
                 else
                 {
-                    System.out.print("O ");
+                    System.out.print("O  ");
                 }
             }
             System.out.println("");
