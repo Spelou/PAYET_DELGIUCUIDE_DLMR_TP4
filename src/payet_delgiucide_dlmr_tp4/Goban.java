@@ -109,9 +109,9 @@ public class Goban {
         }
 
     }
-//méthode case vide qui renvoit vrai si la case est vide et faux sinon, 
-//on suppose les paramètres justes 
 
+//méthode case vide qui renvoit vrai si la case est vide et faux sinon, 
+//on suppose les paramètres justes
     public boolean estVide(int x, int y) {
         boolean test = true;
         if (plateau[x][y].getEtat() == 1) {
