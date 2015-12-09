@@ -70,7 +70,7 @@ public class Goban {
         }
         System.out.println("");
         //affichage de tirets
-         for (int i = 0; i < (3*taille+3); i++) {
+        for (int i = 0; i < (3 * taille + 3); i++) {
             System.out.print("-");
         }
         System.out.println("");
@@ -85,7 +85,7 @@ public class Goban {
             }
 
             for (int k = 0; k < taille; k++) {
-                if ((plateau[j][k].getEtat() == 1)||(plateau[j][k].getEtat() == -1)) {
+                if ((plateau[j][k].getEtat() == 1) || (plateau[j][k].getEtat() == -1)) {
                     System.out.print(plateau[j][k].getCouleur() + "  ");
                 } else {
                     System.out.print("O  ");
@@ -100,48 +100,48 @@ public class Goban {
 // supposés justes et qui met à jour son degré de liberté
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre
-        if ((estVide(x,y))&&((coul.equals("B")||coul.equals("N")))) {
-            Pierre nouvPierre= new Pierre(coul,1,4,-1);
-            plateau[x][y]=nouvPierre;
-        }
-        else //les arguments de base sont faux
+        if ((estVide(x, y)) && ((coul.equals("B") || coul.equals("N")))) {
+            Pierre nouvPierre = new Pierre(coul, 1, 4, -1);
+            plateau[x][y] = nouvPierre;
+        } else //les arguments de base sont faux
         {
             System.out.println("error, bad arguments in method poserPierre");
         }
-        
 
-}
+    }
 //méthode case vide qui renvoit vrai si la case est vide et faux sinon, 
 //on suppose les paramètres justes 
+
     public boolean estVide(int x, int y) {
         boolean test = true;
-        if(plateau[x][y].getEtat()==1){
-            test=false;
+        if (plateau[x][y].getEtat() == 1) {
+            test = false;
         }
         return test;
     }
 //méthode no suicide renvoit 0 si la position demandée fait le suicide d'un groupe
 //la méthode renvoit vrai si pas de suicide faux sinon
-    public boolean nonSuicide(int x,int y){
-        boolean test=true;
-        
+
+    public boolean nonSuicide(int x, int y) {
+        boolean test = true;
+
         return test;
     }
 //mettre à jour groupe méthode qui prend en argument deux entiers et une couleur et qui regarde si 
 //la pierre appartient à un ancien groupe, fait la jointure de 2 groupes, ou forme un groupe seul (les paramètres sont considérés comme juste)
-    public void mettreAJourGroupe(int x,int y,String coul){
+
+    public void mettreAJourGroupe(int x, int y, String coul) {
         //pierre d'intialisation
-        Pierre nouvPierre=new Pierre(coul,1,-1,0);
+        Pierre nouvPierre = new Pierre(coul, 1, -1, 0);
         //initialisation du groupe associé à la pierre
-        Groupe nouvGroupe=new Groupe(listeGroupes.size(),nouvPierre);
+        Groupe nouvGroupe = new Groupe(listeGroupes.size(), nouvPierre);
         //il faut regarder les groupes aux alentours
-        for(int j=0;j<listeGroupes.size();j++){
+        if((!estVide(x-1,y-1))&&(nouvGroupe.getCouleur().equals(coul))){
+            nouvGroupe.fusion((Groupe)listeGroupes.get(plateau[x-1][y-1].getNumGroupe()));
+        }
+        else{
             
         }
-        
-        
-        
-        
     }
-    
+
 }
