@@ -28,7 +28,6 @@ public class Groupe {
 
         listePierres = new ArrayList<Pierre>();
         listePierres.add(premierePierre);
-        liberte += premierePierre.getLiberte();  // mise à jour des libertés du groupe 
     }
 
     public void ajouterPierre(Pierre pie) {
@@ -71,7 +70,6 @@ public class Groupe {
         for (int i = 0; i < listePierres.size(); i++) {
             System.out.println(listePierres.get(i).getCouleur().toString());
         }
-
     }
 
 //getteurs
