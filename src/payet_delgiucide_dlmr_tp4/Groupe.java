@@ -14,12 +14,10 @@ import java.util.ArrayList;
 public class Groupe {
 
     //attributs
-
     private int numGroupe;
     private int liberte; //commence à 0, somme des liberté de chaque pierre du groupe
     private int etat; // ??j'sais plus
     private String couleur; //idem que pour celle de pierre (N ou B)
-    private int nombrePierre;
     private ArrayList<Pierre> listePierres;
 
     public Groupe(int numGroupe, int liberte, String couleur, Pierre premierePierre) {
@@ -38,13 +36,26 @@ public class Groupe {
     }
 
     public void fusion(Groupe g) {
-        listePierres.addAll(g.listePierres);
-        g = null;
+        if (g.couleur.equals(this.couleur)) {
+            
+            liberte+=g.liberte;  // rajout des libertés du groupe à rattacher 
+            liberte-=1;  // On n'oublie pas à enlever le degré de liberté qui permet de les relier.
+            
+            for (int i = 0; i < g.listePierres.size(); i++) { //On change le numéro de groupe de chaque pierre du groupe qui va être supprimé.
+                g.listePierres.get(i).setNumGroupe(this.numGroupe);
+            }
+            listePierres.addAll(g.listePierres); // fusion des listes de pierres des 2 groupe
+
+            g = null;  //suppression du groupe en paramétre. Le garbage collector s'occupe du reste (Vive Java)
+            
+        } else {
+            System.out.println("Erreur: impossible de fusionner 2 groupes de couleurs différentes.");
+        }
     }
 
     public void calculLiberte() {
         for (int i = 0; i < listePierres.size(); i++) {
-            liberte+=listePierres.get(i).getLiberte();
+            liberte += listePierres.get(i).getLiberte();
         }
     }
 
