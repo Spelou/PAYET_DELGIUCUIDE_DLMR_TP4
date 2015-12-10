@@ -145,21 +145,25 @@ public class Goban {
         //ajouter le groupe à la liste
         listeGroupes.add(nouvGroupe);
         //il faut regarder les groupes aux alentours
-        // on regarde s'il y a un groupe à gauche de la même couleur, si oui on fusionne
+        // on regarde s'il y a un groupe à gauche de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x-1][y].getCouleur()))) {
             nouvGroupe.fusion(listeGroupes.get(plateau[x - 1][y].getNumGroupe()));
+            listeGroupes.remove(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
         }
-        //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne
+        //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x, y + 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y+1].getCouleur()))) {
             nouvGroupe.fusion(listeGroupes.get(plateau[x][y + 1].getNumGroupe()));
+            listeGroupes.remove(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
         }
-        //de même on regarde s'il y a un groupe à droite de la même couleur, si oui on fusionne
+        //de même on regarde s'il y a un groupe à droite de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x + 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x+1][y].getCouleur()))) {
             nouvGroupe.fusion(listeGroupes.get(plateau[x + 1][y].getNumGroupe()));
+            listeGroupes.remove(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
         }
-        //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne
+        //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x, y - 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y-1].getCouleur()))) {
             nouvGroupe.fusion(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
+            listeGroupes.remove(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
         }
 
     }
