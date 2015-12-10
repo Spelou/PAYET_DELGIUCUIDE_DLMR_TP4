@@ -16,7 +16,7 @@ public class Groupe {
     //attributs
     private int numGroupe;
     private int liberte; //commence à 0, somme des liberté de chaque pierre du groupe
-    private int etat; // ??j'sais plus
+    private int etat; // 0 mort, 1 pris, 2 en jeu
     private String couleur; //idem que pour celle de pierre (N ou B)
     private ArrayList<Pierre> listePierres;
 
@@ -24,7 +24,7 @@ public class Groupe {
           
         this.numGroupe = numGroupe;
         this.liberte = premierePierre.getLiberte();
-        this.etat = 1;
+        this.etat = premierePierre.getEtat();
         this.couleur = premierePierre.getCouleur();;
 
         listePierres = new ArrayList<Pierre>();
@@ -63,7 +63,7 @@ public class Groupe {
         }
     }
 
-    public void changerEtat() {
+    public void changerEtat(int etat) {
 
     }
 
