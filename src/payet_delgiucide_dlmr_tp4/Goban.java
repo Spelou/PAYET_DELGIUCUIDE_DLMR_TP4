@@ -88,9 +88,10 @@ public class Goban {
 // méthode qui place la pierre à l'endroit indiqué par l'utilisateur (deux entiers en paramètre) et une couleur 
 // supposés justes et qui met à jour son degré de liberté
     public void poserPierre(int x, int y, String coul) {
-        //ajout de la pierre
-        if ((estVide(x, y)) && (estValide(x,y,coul)) && (nonSuicide(x, y, coul))) {
-            Pierre nouvPierre = new Pierre(coul, 1, 4, listeGroupes.size());
+        //ajout de la pierre si case non vide, si champs valide et si pas de suicide
+        if ((estVide(x, y)) && (estValide(x,y,coul))/* && (nonSuicide(x, y, coul))*/) {
+            //création d'une pierre
+            Pierre nouvPierre = new Pierre(coul, 1, 4, maxNumGroupe()+1,x,y);
             mettreAJourDeg(nouvPierre, x, y);
             plateau[x][y] = nouvPierre;
             mettreAJourGroupe(x,y,coul);
@@ -134,13 +135,9 @@ public class Goban {
 //la pierre appartient à un ancien groupe, fait la jointure de 2 groupes, ou forme un groupe seul (les paramètres sont considérés comme juste)
 
     public void mettreAJourGroupe(int x, int y, String coul) {
-        //pierre d'intialisation
-        Pierre nouvPierre = new Pierre(coul, 1, -1, 0);
-        //mise à jour du degré de liberté de la pierre
-
+        //récupération de la pierre associée
+        Pierre nouvPierre = plateau[x][y];
         //initialisation du groupe associé à la pierre
-        int essai=listeGroupes.size();
-        
         Groupe nouvGroupe = new Groupe(maxNumGroupe()+1, nouvPierre);
         //ajouter le groupe à la liste
         listeGroupes.add(nouvGroupe);
