@@ -5,6 +5,7 @@
  */
 package payet_delgiucide_dlmr_tp4;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -43,7 +44,7 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
         gob.poserPierre(0, 1, "N");
         gob.poserPierre(1, 0, "N");
         gob.poserPierre(0, 0, "B");
-        gob.afficher();
+        gob.afficher();  
     }
 
 }

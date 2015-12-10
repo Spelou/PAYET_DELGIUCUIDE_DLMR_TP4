@@ -102,38 +102,45 @@ public class Goban {
 
     }
 
-    public int calculLiberte(Groupe g) {
+  public int calculLiberte(Groupe g) {
         int[][] gobanVirtuel = new int[19][19];
+        for (int i = 0; i < 19; i++) {
+            for (int j = 0; j < 19; j++) {
+                gobanVirtuel[i][j]=0;
+            }  
+        }
         int lib = 0;
-        for (int i = 1; i < g.getListePierres().size(); i++) {
+        for (int i = 0; i < g.getListePierres().size(); i++) {
             int a = g.getListePierres().get(i).getX();
             int b = g.getListePierres().get(i).getY();
             if (plateau[a + 1][b].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a][b] == 0) {
-                    gobanVirtuel[a][b] = 1;
+                if (gobanVirtuel[a+1][b] == 0) {
+                    gobanVirtuel[a+1][b] = 1;
                     lib = lib + 1;
                 }
             }
             if (plateau[a - 1][b].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a][b] == 0) {
-                    gobanVirtuel[a][b] = 1;
+                if (gobanVirtuel[a-1][b] == 0) {
+                    gobanVirtuel[a-1][b] = 1;
                     lib = lib + 1;
                 }
             }
             if (plateau[a][b + 1].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a][b] == 0) {
-                    gobanVirtuel[a][b] = 1;
+                if (gobanVirtuel[a][b+1] == 0) {
+                    gobanVirtuel[a][b+1] = 1;
                     lib = lib + 1;
                 }
             }
             if (plateau[a][b - 1].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a][b] == 0) {
-                    gobanVirtuel[a][b] = 1;
+                if (gobanVirtuel[a][b-1] == 0) {
+                    gobanVirtuel[a][b-1] = 1;
                     lib = lib + 1;
                 }
             }
         }
+        g.setLiberte(lib);
         return lib;
+        
     }
 //méthode case vide qui renvoit vrai si la case est vide et faux sinon, 
 //on suppose les paramètres justes
