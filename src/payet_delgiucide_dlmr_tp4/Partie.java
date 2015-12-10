@@ -35,7 +35,7 @@ public class Partie {
         J2=new Joueur(nom,couleur);
         
         //création du terrain
-        gob=new Goban();
+        gob=new Goban(19);
         
        
         
