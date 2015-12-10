@@ -18,7 +18,7 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        /*System.out.println("Bienvenue dans le jeu de go, création du Goban");
+        System.out.println("Bienvenue dans le jeu de go, création du Goban");
         //boucle de vérification
         boolean test = true;//variable de vérification
         //scanner de récupération
@@ -36,7 +36,7 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
         }
         Goban gob = new Goban(taille);
         gob.afficher();
-        gob.poserPierre(0, 0, "N");
+        /*gob.poserPierre(0, 0, "N");
         gob.afficher();
         gob.poserPierre(0, 0, "B");
         gob.afficher();
