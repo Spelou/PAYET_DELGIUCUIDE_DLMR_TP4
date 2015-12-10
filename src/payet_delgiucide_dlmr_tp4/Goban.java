@@ -74,7 +74,7 @@ public class Goban {
             }
 
             for (int k = 0; k < taille; k++) {
-                if ((plateau[j][k].getEtat() == 1) || (plateau[j][k].getEtat() == -1)) {
+                if ((plateau[j][k].getEtat() == 0) || (plateau[j][k].getEtat() == 2)) {
                     System.out.print(plateau[j][k].getCouleur() + "  ");
                 } else {
                     System.out.print("O  ");
