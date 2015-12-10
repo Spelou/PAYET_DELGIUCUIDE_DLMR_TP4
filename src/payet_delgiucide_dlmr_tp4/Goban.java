@@ -29,7 +29,7 @@ public class Goban {
         //initialisation plateau
         plateau = new Pierre[taille][taille];
         //création d'une pierre vide
-        Pierre pierreVide = new Pierre("O", -1, 0, -1);
+        Pierre pierreVide = new Pierre("O", -1, 0, -1,-1,-1);
         //initialisation du terrain, on met des pierres vides partout
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) {
@@ -209,6 +209,10 @@ public class Goban {
         return max;
     }
 
+    public int indiceGroupe(int numero){
+        int indice=0;
+        return indice;
+    }
     //getters
     public Pierre[][] getPlateau() {
         return plateau;
