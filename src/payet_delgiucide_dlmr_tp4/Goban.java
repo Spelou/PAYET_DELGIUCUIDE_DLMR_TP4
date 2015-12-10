@@ -89,10 +89,11 @@ public class Goban {
 // supposés justes et qui met à jour son degré de liberté
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre
-        if ((estVide(x, y)) && ((coul.equals("B") || coul.equals("N"))) && (nonSuicide(x, y, coul))) {
-            Pierre nouvPierre = new Pierre(coul, 1, 4, -1);
+        if ((estVide(x, y)) && (estValide(x,y,coul)) && (nonSuicide(x, y, coul))) {
+            Pierre nouvPierre = new Pierre(coul, 1, 4, listeGroupes.size());
             mettreAJourDeg(nouvPierre, x, y);
             plateau[x][y] = nouvPierre;
+            mettreAJourGroupe(x,y,coul);
         } else //les arguments de base sont faux
         {
             System.out.println("error, bad arguments in method poserPierre");
@@ -145,20 +146,20 @@ public class Goban {
         listeGroupes.add(nouvGroupe);
         //il faut regarder les groupes aux alentours
         // on regarde s'il y a un groupe à gauche de la même couleur, si oui on fusionne
-        if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(coul))) {
-            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x - 1][y].getNumGroupe()));
+        if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x-1][y].getCouleur()))) {
+            nouvGroupe.fusion(listeGroupes.get(plateau[x - 1][y].getNumGroupe()));
         }
         //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne
-        if ((!estVide(x, y + 1)) && (nouvGroupe.getCouleur().equals(coul))) {
-            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x][y + 1].getNumGroupe()));
+        if ((!estVide(x, y + 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y+1].getCouleur()))) {
+            nouvGroupe.fusion(listeGroupes.get(plateau[x][y + 1].getNumGroupe()));
         }
         //de même on regarde s'il y a un groupe à droite de la même couleur, si oui on fusionne
-        if ((!estVide(x + 1, y)) && (nouvGroupe.getCouleur().equals(coul))) {
-            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x + 1][y].getNumGroupe()));
+        if ((!estVide(x + 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x+1][y].getCouleur()))) {
+            nouvGroupe.fusion(listeGroupes.get(plateau[x + 1][y].getNumGroupe()));
         }
         //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne
-        if ((!estVide(x, y - 1)) && (nouvGroupe.getCouleur().equals(coul))) {
-            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
+        if ((!estVide(x, y - 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y-1].getCouleur()))) {
+            nouvGroupe.fusion(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
         }
 
     }
@@ -193,4 +194,13 @@ public class Goban {
         return test;
     }
 
+    public int maxNumGroupe(){
+        int max=0;
+        for(int i=0;i<listeGroupes.size();i++){
+            if(listeGroupes.get(i).getNumGroupe()>max){
+                max=listeGroupes.get(i).getNumGroupe();
+            }
+        }
+        return max;
+    }
 }
