@@ -144,26 +144,29 @@ public class Goban {
         //il faut regarder les groupes aux alentours
         // on regarde s'il y a un groupe à gauche de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x-1][y].getCouleur()))) {
-            int numeroPierreAdjacente=plateau[x - 1][y].getNumGroupe();
-            nouvGroupe.fusion(listeGroupes.get(plateau[x - 1][y].getNumGroupe()));
+            int numeroPierreAdjacente=indiceGroupe(plateau[x - 1][y].getNumGroupe());
+            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
             listeGroupes.remove(numeroPierreAdjacente);
         }
         //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x, y + 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y+1].getCouleur()))) {
-            int numeroPierreAdjacente=plateau[x][y+1].getNumGroupe();
-            nouvGroupe.fusion(listeGroupes.get(plateau[x][y + 1].getNumGroupe()));
+            int numeroPierreAdjacente=indiceGroupe(plateau[x][y+1].getNumGroupe());
+            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
             listeGroupes.remove(numeroPierreAdjacente);
         }
         //de même on regarde s'il y a un groupe à droite de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x + 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x+1][y].getCouleur()))) {
-             int numeroPierreAdjacente=plateau[x+1][y].getNumGroupe();
-            nouvGroupe.fusion(listeGroupes.get(plateau[x + 1][y].getNumGroupe()));
+            int numeroPierreAdjacente=indiceGroupe(plateau[x + 1][y].getNumGroupe());
+            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
             listeGroupes.remove(numeroPierreAdjacente);
         }
         //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x, y - 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y-1].getCouleur()))) {
-             int numeroPierreAdjacente=plateau[x][y-1].getNumGroupe();
-            nouvGroupe.fusion(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
+            //récupération de l'indice dans le tableau de la pierre adjacente
+            int numeroPierreAdjacente=indiceGroupe(plateau[x][y-1].getNumGroupe());
+            //fusion des groupes nouvGroupe et le groupe de la pierre adjacente
+            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
+            //on supprime le groupe initatialment adjacent
             listeGroupes.remove(numeroPierreAdjacente);
         }
 
@@ -211,6 +214,11 @@ public class Goban {
 
     public int indiceGroupe(int numero){
         int indice=0;
+        for(int i=0;i<listeGroupes.size();i++){
+            if(listeGroupes.get(i).getNumGroupe()==numero){
+                indice=i;
+            }
+        }
         return indice;
     }
     //getters
