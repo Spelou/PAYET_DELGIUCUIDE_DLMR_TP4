@@ -36,14 +36,14 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
         }
         Goban gob = new Goban(taille);
         gob.afficher();
-        /*gob.poserPierre(0, 0, "N");
+        gob.poserPierre(0, 0, "N");
         gob.afficher();
         gob.poserPierre(0, 0, "B");
         gob.afficher();
         gob.poserPierre(0, 1, "N");
         gob.poserPierre(1, 0, "N");
         gob.poserPierre(0, 0, "B");
-        gob.afficher();*/
+        gob.afficher();
     }
 
 }
