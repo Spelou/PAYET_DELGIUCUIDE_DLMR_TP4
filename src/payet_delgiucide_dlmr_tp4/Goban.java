@@ -16,7 +16,7 @@ public class Goban {
 
     //attributs
     private Pierre[][] plateau; //plateau de jeu, matrice de pierre
-    private ArrayList listeGroupes;
+    private ArrayList<Groupe> listeGroupes;
     private int taille;
     private int pierreMorteB;
     private int pierreMorteN;
@@ -100,8 +100,9 @@ public class Goban {
 // supposés justes et qui met à jour son degré de liberté
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre
-        if ((estVide(x, y)) && ((coul.equals("B") || coul.equals("N")))) {
+        if ((estVide(x, y)) && ((coul.equals("B") || coul.equals("N")))&&(nonSuicide(x,y,coul))) {
             Pierre nouvPierre = new Pierre(coul, 1, 4, -1);
+            mettreAJourDeg(nouvPierre, x, y);
             plateau[x][y] = nouvPierre;
         } else //les arguments de base sont faux
         {
@@ -122,9 +123,19 @@ public class Goban {
 //méthode no suicide renvoit 0 si la position demandée fait le suicide d'un groupe
 //la méthode renvoit vrai si pas de suicide faux sinon
 
-    public boolean nonSuicide(int x, int y) {
+    public boolean nonSuicide(int x, int y, String coul) {
         boolean test = true;
-
+        //On stocke l'actuelle liste de groupe
+        ArrayList<Groupe> ancienneListe = new ArrayList<>();
+        ancienneListe.equals(listeGroupes);
+        //On met à jour les groupes avec la nouvelle position
+        mettreAJourGroupe(x, y, coul);
+        //si la pierre ajoutée provoque un suicide du nouveau groupe associé alors on recopie l'ancienne liste
+        //sinon on supprime la pierre de 
+        if (listeGroupes.get(listeGroupes.size() - 1).getEtat() == 0) {
+            test = false;
+        }
+        listeGroupes.equals(ancienneListe);
         return test;
     }
 //mettre à jour groupe méthode qui prend en argument deux entiers et une couleur et qui regarde si 
@@ -133,15 +144,60 @@ public class Goban {
     public void mettreAJourGroupe(int x, int y, String coul) {
         //pierre d'intialisation
         Pierre nouvPierre = new Pierre(coul, 1, -1, 0);
+        //mise à jour du degré de liberté de la pierre
+
         //initialisation du groupe associé à la pierre
         Groupe nouvGroupe = new Groupe(listeGroupes.size(), nouvPierre);
+        //ajouter le groupe à la liste
+        listeGroupes.add(nouvGroupe);
         //il faut regarder les groupes aux alentours
-        if((!estVide(x-1,y-1))&&(nouvGroupe.getCouleur().equals(coul))){
-            nouvGroupe.fusion((Groupe)listeGroupes.get(plateau[x-1][y-1].getNumGroupe()));
+        // on regarde s'il y a un groupe à gauche de la même couleur, si oui on fusionne
+        if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(coul))) {
+            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x - 1][y].getNumGroupe()));
         }
-        else{
-            
+        //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne
+        if ((!estVide(x, y + 1)) && (nouvGroupe.getCouleur().equals(coul))) {
+            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x][y + 1].getNumGroupe()));
         }
+        //de même on regarde s'il y a un groupe à droite de la même couleur, si oui on fusionne
+        if ((!estVide(x + 1, y)) && (nouvGroupe.getCouleur().equals(coul))) {
+            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x + 1][y].getNumGroupe()));
+        }
+        //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne
+        if ((!estVide(x, y - 1)) && (nouvGroupe.getCouleur().equals(coul))) {
+            nouvGroupe.fusion((Groupe) listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
+        }
+
     }
 
+    //méthode qui met à jour le deg de la pierre si on l'ajoute à l'emplacement x,y
+    public int mettreAJourDeg(Pierre nouvPierre, int x, int y) {
+        //par défaut égal à 4
+        int degLiberte = 4;
+        //diminuer le degré de liberté si occupation des cases
+        if (!estVide(x - 1, y)) {
+            degLiberte--;
+        }
+        if (!estVide(x, y + 1)) {
+            degLiberte--;
+        }
+        if (!estVide(x + 1, y)) {
+            degLiberte--;
+        }
+        if (!estVide(x, y - 1)) {
+            degLiberte--;
+        }
+        return degLiberte;
+    }
+    
+    //vérification de la validité des champs d'entrée : x et y entre 0 et taille-1 et coul = B ou N
+    public boolean estValide(int x,int y,String coul){
+        boolean test=true;
+        //condition de validité sur x,y et la couleur
+        if((x<0)||(x>=taille)||(y<0)||(y>=taille)||(!(coul.equals("B")||coul.equals("N")))||(!nonSuicide(x,y,coul))){
+            test=false;
+        }
+        return test;
+    }
+    
 }
