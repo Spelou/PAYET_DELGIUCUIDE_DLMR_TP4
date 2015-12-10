@@ -39,6 +39,8 @@ public class Goban {
         //initialisation des pierres mortes
         pierreMorteB = 0;
         pierreMorteN = 0;
+        //liste Groupe
+        listeGroupes= new ArrayList<Groupe>();
     }
 
 // méthode d'affichage - écrit les numéros des colonnes ainsi que ceux des lignes 
@@ -136,6 +138,8 @@ public class Goban {
         //mise à jour du degré de liberté de la pierre
 
         //initialisation du groupe associé à la pierre
+        int essai=listeGroupes.size();
+        
         Groupe nouvGroupe = new Groupe(listeGroupes.size(), nouvPierre);
         //ajouter le groupe à la liste
         listeGroupes.add(nouvGroupe);
@@ -164,16 +168,16 @@ public class Goban {
         //par défaut égal à 4
         int degLiberte = 4;
         //diminuer le degré de liberté si occupation des cases
-        if (!estVide(x - 1, y)) {
+        if ((!estVide(x - 1, y))||((x-1)<0)) {
             degLiberte--;
         }
-        if (!estVide(x, y + 1)) {
+        if ((!estVide(x, y + 1))||((y + 1)>=taille)) {
             degLiberte--;
         }
-        if (!estVide(x + 1, y)) {
+        if ((!estVide(x + 1, y))||((x + 1)>=taille)) {
             degLiberte--;
         }
-        if (!estVide(x, y - 1)) {
+        if ((!estVide(x, y - 1))||((y - 1)<0)) {
             degLiberte--;
         }
         return degLiberte;
