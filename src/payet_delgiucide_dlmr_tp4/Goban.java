@@ -147,8 +147,9 @@ public class Goban {
         //il faut regarder les groupes aux alentours
         // on regarde s'il y a un groupe à gauche de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x-1][y].getCouleur()))) {
+            int numeroPierreAdjacente=plateau[x - 1][y].getNumGroupe();
             nouvGroupe.fusion(listeGroupes.get(plateau[x - 1][y].getNumGroupe()));
-            listeGroupes.remove(listeGroupes.get(plateau[x][y - 1].getNumGroupe()));
+            listeGroupes.remove(numeroPierreAdjacente);
         }
         //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne et on supprime l'ancien
         if ((!estVide(x, y + 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y+1].getCouleur()))) {
@@ -207,4 +208,52 @@ public class Goban {
         }
         return max;
     }
+
+    //getters
+    public Pierre[][] getPlateau() {
+        return plateau;
+    }
+
+    public ArrayList<Groupe> getListeGroupes() {
+        return listeGroupes;
+    }
+
+    public int getTaille() {
+        return taille;
+    }
+
+    public int getPierreMorteB() {
+        return pierreMorteB;
+    }
+
+    public int getPierreMorteN() {
+        return pierreMorteN;
+    }
+    
+    //setters
+
+    public void setPlateau(Pierre[][] plateau) {
+        this.plateau = plateau;
+    }
+
+    public void setListeGroupes(ArrayList<Groupe> listeGroupes) {
+        this.listeGroupes = listeGroupes;
+    }
+
+    public void setTaille(int taille) {
+        this.taille = taille;
+    }
+
+    public void setPierreMorteB(int pierreMorteB) {
+        this.pierreMorteB = pierreMorteB;
+    }
+
+    public void setPierreMorteN(int pierreMorteN) {
+        this.pierreMorteN = pierreMorteN;
+    }
+    
+    
+    
+    
+    
 }
