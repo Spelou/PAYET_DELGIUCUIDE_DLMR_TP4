@@ -26,7 +26,8 @@ public class GroupeTest {
 
     /**
      * Test of ajouterPierre method, of class Groupe.
-     */
+     * méthode supprimée, redondante avec la fusion de deux groupes.
+     
     @Test
     public void testAjouterPierre() {
         System.out.println("ajouterPierre");
@@ -51,7 +52,8 @@ public class GroupeTest {
         groupe1.ajouterPierre(pierreN);
         assertEquals(groupe1.getListePierres().size(), a + 1);
     }
-
+    */
+    
     /**
      * Test of fusion method, of class Groupe.
      */
@@ -95,42 +97,71 @@ public class GroupeTest {
 
         // La suite des tests sert à vérifier la bonne fusion de deux groupes  
         // de pierres blanches
-        
-        // 1. Que le groupe créé contient le bon nombre de pierres
         groupe1.fusion(groupe2);
+        // 1. Que le groupe créé contient le bon nombre de pierres
         assertEquals(groupe1.getListePierres().size(), 8);
         // 2. Que le degré de liberté du nouveau groupe correspond bien à la somme des degrés de liberté des groupes
-        assertEquals(groupe1.getLiberte(),12);
+        assertEquals(groupe1.getLiberte(), 12);
         // 3. Que toutes les pierres du groupe2 ont changé de groupe
-        assertEquals(pierreB5.getNumGroupe(),1);
-        assertEquals(pierreB6.getNumGroupe(),1);
-        assertEquals(pierreB7.getNumGroupe(),1);
-        assertEquals(pierreB8.getNumGroupe(),1);
-        // 4. Que le groupe2 a bien été supprimé
-        try {
-            int s=groupe2.getListePierres().size();
-            System.out.println(s);
-        } catch (Exception e) {
-            System.out.println("Le groupe2 a bien été supprimé");
-        }
+        assertEquals(pierreB5.getNumGroupe(), 1);
+        assertEquals(pierreB6.getNumGroupe(), 1);
+        assertEquals(pierreB7.getNumGroupe(), 1);
+        assertEquals(pierreB8.getNumGroupe(), 1);
 
     }
 
-    /**
-     * Test of calculLiberte method, of class Groupe.
+    // Vérification que le groupe en paramètre d'une fusion pointe vers null
+    /* @Test(expected = NullPointerException.class)
+     public void checkExpectedException() {
+     System.out.println("checkExpectedException");
+     Pierre pierreB1 = new Pierre("B", 2, 3, 1);
+     Groupe groupe1 = new Groupe(1, pierreB1);
+     Pierre pierreB2 = new Pierre("B", 2, 3, 2);
+     Groupe groupe2 = new Groupe(2, pierreB2);
+     groupe1.fusion(groupe2);
+     int taille = groupe2.getListePierres().size();
+     }
      */
-    @Test
-    public void testCalculLiberte() {
-        System.out.println("calculLiberte");
-
-    }
-
     /**
      * Test of changerEtat method, of class Groupe.
      */
     @Test
     public void testChangerEtat() {
         System.out.println("changerEtat");
+        // initialisation de deux groupes de pierres blanches
+        Pierre pierreB1 = new Pierre("B", 2, 3, 2);
+        Groupe groupe1 = new Groupe(1, pierreB1);
+        Pierre pierreB2 = new Pierre("B", 2, 1, 2);
+        Pierre pierreB3 = new Pierre("B", 2, 0, 2);
+        Pierre pierreB4 = new Pierre("B", 2, 2, 2);
+        groupe1.ajouterPierre(pierreB2);
+        groupe1.ajouterPierre(pierreB3);
+        groupe1.ajouterPierre(pierreB4);
 
+        Pierre pierreB5 = new Pierre("B", 2, 3, 2);
+        Groupe groupe2 = new Groupe(2, pierreB5);
+        Pierre pierreB6 = new Pierre("B", 2, 1, 2);
+        Pierre pierreB7 = new Pierre("B", 2, 0, 2);
+        Pierre pierreB8 = new Pierre("B", 2, 2, 2);
+        groupe2.ajouterPierre(pierreB6);
+        groupe2.ajouterPierre(pierreB7);
+        groupe2.ajouterPierre(pierreB8);
+
+        // test du changement d'état à mort
+        groupe1.changerEtat(0);
+        assertEquals(groupe1.getEtat(), 0);
+        assertEquals(pierreB1.getEtat(), 0);
+        assertEquals(pierreB2.getEtat(), 0);
+        assertEquals(pierreB3.getEtat(), 0);
+        assertEquals(pierreB4.getEtat(), 0);
+
+        // test du changement d'état à pris
+        groupe2.changerEtat(1);
+        assertEquals(groupe2.getEtat(), 1);
+        assertEquals(pierreB5.getEtat(), 1);
+        assertEquals(pierreB6.getEtat(), 1);
+        assertEquals(pierreB7.getEtat(), 1);
+        assertEquals(pierreB8.getEtat(), 1);
+        
     }
 }

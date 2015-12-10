@@ -15,13 +15,19 @@ public class Pierre {
     private int etat;  // 0 mort, 1 prise, 2 en jeu
     private int liberte; // nombre de degré de liberté de 0 à 4
     private int numGroupe;
+    private int x; 
+    private int y;
+
+    
 //getteurs
     
-    public Pierre(String color,int state,int liberty,int groupNumber){
+    public Pierre(String color,int state,int liberty,int groupNumber, int x, int y){
         this.couleur=color;
         this.etat=state;
         this.liberte=liberty;
         this.numGroupe=groupNumber;
+        this.x=x;
+        this.y=y;
     }
     
     
@@ -85,6 +91,25 @@ public class Pierre {
     }
  
     //méthode
+    public void setCouleur(String couleur) {
+        this.couleur = couleur;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
     
     
 }

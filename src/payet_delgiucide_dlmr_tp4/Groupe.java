@@ -31,15 +31,6 @@ public class Groupe {
         listePierres.add(premierePierre);
     }
 
-    public void ajouterPierre(Pierre pie) {
-        if (pie.getCouleur().equals(this.couleur)) {
-            listePierres.add(pie);      // rajout de la pierre après verification de la couleur
-            liberte += pie.getLiberte();  // mise à jour liberté du groupe
-        } else {
-            System.out.println("Erreur: impossible d'ajouter une pierre qui n'est pas de la couleur du groupe.");
-        }
-    }
-
     public void fusion(Groupe g) {
         if (g.couleur.equals(this.couleur)) {
 
