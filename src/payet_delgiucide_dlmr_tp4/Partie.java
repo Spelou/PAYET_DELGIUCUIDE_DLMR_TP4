@@ -22,7 +22,7 @@ public class Partie {
  * initialise le goban appelé gob...
  */
     public Partie() {
-        //création des joueurs
+         //création des joueurs
         String nom;
         String couleur="N";
         Scanner scan=new Scanner(System.in);
@@ -35,11 +35,22 @@ public class Partie {
         J2=new Joueur(nom,couleur);
         
         //création du terrain
-        gob=new Goban(19);
+        //boucle de vérification
+        boolean test = true;//variable de vérification
+        //scanner de récupération
+        Scanner myScan = new Scanner(System.in);
         
-       
-        
-        
+        while (test) {
+            System.out.println("Entrer la taille du goban (9,16,19):"); // on demande les données à l'utilisateur
+            int choix = myScan.nextInt();
+            taille = choix;
+            if ((choix == 9) || (choix == 16) || (choix == 19)) {
+                test = false; // sortie de boucle
+               gob = new Goban(taille);
+            } else {
+                System.out.println("Vous n'avez pas donné une taille correcte.");
+            }
+        } 
     }
     
     /**
@@ -47,30 +58,76 @@ public class Partie {
      */
     private void CestPartie(){
         System.out.println("Et que la partie commence, honneur à "+J1.getNom()+" :");
-        boolean fin=false; // pour savoir si la partie et fini
-        Scanner scan = new Scanner(System.in);
+        boolean fin=true; // pour savoir si la partie et fini
+        Scanner scan2 = new Scanner(System.in);
         int x=0;
         int y=0;
+        boolean test=true; // pour vérifier que x et y sont dans le goban
         while(fin){    //1 while par tour. la partie est finit si fin passe à true
-            System.out.println("Où voulez vous mettre votre pierre (rentrer x puis y) :\n(-1 -1 si vous passer votre tour)");
-            x=scan.nextInt();
-            y=scan.nextInt();
+            gob.afficher();
+            System.out.println("Où voulez vous mettre votre pierre (rentrer x puis y) :\n(-1 -1 si vous passer votre tour)\nx= ");
+            //prend et vérifie les coordonnées de xxxxxxxxxx   NOIR
+            while(test){
+                test=false; //on pourra sortir
+                x=scan2.nextInt();
+            if (!((x>=-1)&&(x<taille))) {
+                test=true;  //on recommence
+                System.out.println("Erreur: valeur de x hors goban (x>=-1 et x<"+taille+"). Recommencez\nx= ");
+            }   
+            }
+            
+              //prend et vérifie les coordonnées de yyyyyyyyyyyyyyyy  NOIR
+            test=true; //remettre à vrai pour rentrer dans la prochaine boucle
+            while(test){
+                test=false; //on pourra sortir
+                System.out.println("y= ");
+            y=scan2.nextInt();
+            if (!((y>=-1)&&(y<taille))) {
+                test=true;  //on recommence
+                System.out.println("Erreur: valeur de y hors goban (y>=-1 et y<"+taille+"). Recommencez");
+            }   
+            }
+           test=true; //remettre à vrai pour rentrer dans la prochaine boucle
             if(x==-1&&y==-1){  // on regarde si le joueur passe son tour
                 System.out.println("Vous passez votre tour.");
-                fin=true;
+                fin=false;
             }
             else{
-            gob.poserPierre(x, y, "N"); // On pose la Pierre. ATTENTION faut encore faire les vérifications dans go...
+                
+            gob.poserPierre(x, y,"N"); // On pose la Pierre. ATTENTION faut encore faire les vérifications dans go...
             }
-            System.out.println("Au tour des blancs et "+J2.getNom()+" \n Où voulez vous mettre votre pierre (rentrer x puis y):\n(-1 -1 si vous passer votre tour)");
-            x=scan.nextInt();
-            y=scan.nextInt();
+            
+           
+            System.out.println("Au tour des blancs et "+J2.getNom()+" \n Où voulez vous mettre votre pierre (rentrer x puis y):\n(-1 -1 si vous passer votre tour)\nx= ");
+            //prend et vérifie les coordonnées de xxxxxxxxxxxxxxxx  BLANC
+            while(test){
+                test=false; //on pourra sortir
+                x=scan2.nextInt();
+            if (!((x>=-1)&&(x<taille))) {
+                test=true;  //on recommence
+                System.out.println("Erreur: valeur de x hors goban(x>=-1 et x<"+taille+"). Recommencer");
+            }   
+            }
+            
+              //prend et vérifie les coordonnées de yyyyyyyyyyyy   BLANC
+            test=true; //remettre à vrai pour rentrer dans la prochaine boucle
+            while(test){
+                test=false; //on pourra sortir
+                System.out.println("y= ");
+            y=scan2.nextInt();
+            if (!((y>=-1)&&(y<taille))) {
+                test=true;  //on recommence
+                System.out.println("Erreur: valeur de y hors goban (y>=-1 et y<"+taille+"). Recommencer");
+            }   
+            }
+            
             if(x==-1&&y==-1){  // on regarde si le joueur passe son tour
             System.out.println("Vous passez votre tour.");
             }
             else{
-               gob.poserPierre(x, y, "N"); // On pose la Pierre. ATTENTION faut encore faire les vérifications dans go... 
-               fin=false;
+               gob.poserPierre(x, y, "B"); // On pose la Pierre. ATTENTION faut encore faire les vérifications dans go... 
+               fin=true;
+                System.out.println("Au tour des noir et "+J1.getNom());
             }        
         }
         System.out.println("Vous avez arrêté la partie, libre à vous de comptez les points.\n En espérant que vous vous êtes amusé, merci d'avoir choisi notre jeu.");
