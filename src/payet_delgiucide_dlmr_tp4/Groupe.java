@@ -34,8 +34,6 @@ public class Groupe {
     public void fusion(Groupe g) {
         if (g.couleur.equals(this.couleur)) {
 
-            liberte += g.liberte;  // rajout des libertés du groupe à rattacher 
-
             for (int i = 0; i < g.listePierres.size(); i++) { //On change le numéro de groupe de chaque pierre du groupe qui va être supprimé.
                 g.listePierres.get(i).setNumGroupe(this.numGroupe);
             }
@@ -47,7 +45,17 @@ public class Groupe {
             System.out.println("Erreur: impossible de fusionner 2 groupes de couleurs différentes.");
         }
     }
+    
+    //ajout d'une pierre à un groupe
+    public void fusion(Pierre p) {
+        if (p.getCouleur().equals(this.couleur)) {
+            listePierres.add(p); // fusion des listes de pierres des 2 groupes
+        } else {
+            System.out.println("Erreur: impossible de fusionner 2 groupes de couleurs différentes.");
+        }
+    }
 
+ 
     public void calculLiberte() {
         for (int i = 0; i < listePierres.size(); i++) {
             liberte += listePierres.get(i).getLiberte();
