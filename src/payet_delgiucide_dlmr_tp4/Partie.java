@@ -46,14 +46,33 @@ public class Partie {
      * La partie, les joueurs jouent à tour de rôle.
      */
     private void CestPartie(){
-        System.out.println("Et que la partie commence, honneur à "+J1.getNom());
+        System.out.println("Et que la partie commence, honneur à "+J1.getNom()+" :");
         boolean fin=false; // pour savoir si la partie et fini
+        Scanner scan = new Scanner(System.in);
+        int x=0;
+        int y=0;
         while(fin){    //1 while par tour. la partie est finit si fin passe à true
-            System.out.println("Où voulez vous mettre votre pierre");
-            
+            System.out.println("Où voulez vous mettre votre pierre (rentrer x puis y) :\n(-1 -1 si vous passer votre tour)");
+            x=scan.nextInt();
+            y=scan.nextInt();
+            if(x==-1&&y==-1){  // on regarde si le joueur passe son tour
+                System.out.println("Vous passez votre tour.");
+                fin=true;
+            }
+            else{
+            gob.poserPierre(x, y, "N"); // On pose la Pierre. ATTENTION faut encore faire les vérifications dans go...
+            }
+            System.out.println("Au tour des blancs et "+J2.getNom()+" \n Où voulez vous mettre votre pierre (rentrer x puis y):\n(-1 -1 si vous passer votre tour)");
+            x=scan.nextInt();
+            y=scan.nextInt();
+            if(x==-1&&y==-1){  // on regarde si le joueur passe son tour
+            System.out.println("Vous passez votre tour.");
+            }
+            else{
+               gob.poserPierre(x, y, "N"); // On pose la Pierre. ATTENTION faut encore faire les vérifications dans go... 
+               fin=false;
+            }        
         }
+        System.out.println("Vous avez arrêté la partie, libre à vous de comptez les points.\n En espérant que vous vous êtes amusé, merci d'avoir choisi notre jeu.");
     }
-    
-    
-    
 }
