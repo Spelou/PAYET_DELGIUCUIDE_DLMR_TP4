@@ -141,7 +141,7 @@ public class Goban {
         //initialisation du groupe associé à la pierre
         int essai=listeGroupes.size();
         
-        Groupe nouvGroupe = new Groupe(listeGroupes.size(), nouvPierre);
+        Groupe nouvGroupe = new Groupe(maxNumGroupe()+1, nouvPierre);
         //ajouter le groupe à la liste
         listeGroupes.add(nouvGroupe);
         //il faut regarder les groupes aux alentours
