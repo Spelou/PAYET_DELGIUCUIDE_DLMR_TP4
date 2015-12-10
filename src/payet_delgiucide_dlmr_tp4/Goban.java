@@ -102,6 +102,38 @@ public class Goban {
             System.out.println("Erreur: la case est déjà occupé.");
         }
     }
+    // méthode de calcul de degré de liberté d'une pierre.A vérifier ATTENTION elle est utiliser dans poserPierre
+    public int degreLib(int x,int y){
+        int compt=0;   //compte les libertes
+ 
+        if ((x + 1) < taille) {
+            if (plateau[x + 1][y].getEtat() == -1) {
+                compt++;
+            }
+        } 
+
+        if ((y + 1) < taille) {
+            if (plateau[x][y + 1].getEtat() == 1) {
+                compt++;
+            }
+        } 
+ 
+        if ((x - 1) >= 0) {
+            if (plateau[x - 1][y].getEtat() == 1) {
+                compt++;
+            }
+        } else {
+           compt++;
+        }
+
+        if ((y - 1) >= 0) {
+            if (plateau[x][y - 1].getEtat() == 1) {
+               compt++;
+            }
+        } 
+        return compt;       
+    }
+    
 
   public int calculLiberte(Groupe g) {
         int[][] gobanVirtuel = new int[19][19];
