@@ -21,26 +21,11 @@ public class Goban {
     private int pierreMorteB;
     private int pierreMorteN;
 
-// constructeur de Goban - demande la taille avec vérification à l'utilisateur,
-//initialise taille, intialise toutes les pierres à vide, initialise les pierres mortes à 0
-    public Goban() {
-        System.out.println("Bienvenue dans le jeu de go, création du Goban");
-        //boucle de vérification
-        boolean test = true;//variable de vérification
-        //scanner de récupération
-        Scanner myScan = new Scanner(System.in);
-        while (test) {
-            System.out.println("Entrer la taille du goban (9,16,19)"); // on demande les données à l'utilisateur
-            int choix = myScan.nextInt();
-            this.taille = choix;
-            if ((choix == 9) || (choix == 16) || (choix == 19)) {
-                test = false; // sortie de boucle
-                //initialisation plateau
-                plateau = new Pierre[choix][choix];
-            } else {
-                System.out.println("Vous n'avez pas donné une taille correcte.");
-            }
-        }
+// constructeur de Goban 
+//taille en paramètre supposée juste, intialise toutes les pierres à vide, initialise les pierres mortes à 0
+    public Goban(int taille) {
+        //initialisation plateau
+        plateau = new Pierre[taille][taille];
         //création d'une pierre vide
         Pierre pierreVide = new Pierre("O", -1, 0, -1);
         //initialisation du terrain, on met des pierres vides partout
@@ -100,7 +85,7 @@ public class Goban {
 // supposés justes et qui met à jour son degré de liberté
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre
-        if ((estVide(x, y)) && ((coul.equals("B") || coul.equals("N")))&&(nonSuicide(x,y,coul))) {
+        if ((estVide(x, y)) && ((coul.equals("B") || coul.equals("N"))) && (nonSuicide(x, y, coul))) {
             Pierre nouvPierre = new Pierre(coul, 1, 4, -1);
             mettreAJourDeg(nouvPierre, x, y);
             plateau[x][y] = nouvPierre;
@@ -115,8 +100,10 @@ public class Goban {
 //on suppose les paramètres justes
     public boolean estVide(int x, int y) {
         boolean test = true;
-        if (plateau[x][y].getEtat() == 1) {
-            test = false;
+        if (estValide(x, y, "B")) {
+            if (plateau[x][y].getEtat() == 1) {
+                test = false;
+            }
         }
         return test;
     }
@@ -189,15 +176,15 @@ public class Goban {
         }
         return degLiberte;
     }
-    
+
     //vérification de la validité des champs d'entrée : x et y entre 0 et taille-1 et coul = B ou N
-    public boolean estValide(int x,int y,String coul){
-        boolean test=true;
+    public boolean estValide(int x, int y, String coul) {
+        boolean test = true;
         //condition de validité sur x,y et la couleur
-        if((x<0)||(x>=taille)||(y<0)||(y>=taille)||(!(coul.equals("B")||coul.equals("N")))||(!nonSuicide(x,y,coul))){
-            test=false;
+        if ((x < 0) || (x >= taille) || (y < 0) || (y >= taille) || (!(coul.equals("B") || coul.equals("N"))) || (!nonSuicide(x, y, coul))) {
+            test = false;
         }
         return test;
     }
-    
+
 }
