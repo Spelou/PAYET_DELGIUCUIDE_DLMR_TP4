@@ -33,6 +33,8 @@ public FenetreT(){
 this.setTitle("Goban inutile juste pour faire joli...");
 // emplacement d'origine, ici centrée
 this.setLocationRelativeTo(null);
+//définit la taille de la fenêtre sinon elle est rikiki
+this.setSize(400, 500);
 // permet de pouvoir réellement fermer le processus de la fenêtre via la croix rouge habituel en haut à droite de Windows
 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 setContentPane(new AfficheImage("goban19.png"));
