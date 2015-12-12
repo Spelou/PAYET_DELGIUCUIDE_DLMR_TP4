@@ -108,6 +108,16 @@ public class Pierre {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        String retour=""+
+       "couleur: "+couleur+        // N,B,V pour Noir, Blanc, Vide
+     " état: "+etat+                // 0 mort, 1 prise, 2 en jeu
+     " liberté: "+liberte+          // nombre de degré de liberté de 0 à 4
+    " Numéro Groupe"+numGroupe;
+     return retour;
+    }
     
     
 }
