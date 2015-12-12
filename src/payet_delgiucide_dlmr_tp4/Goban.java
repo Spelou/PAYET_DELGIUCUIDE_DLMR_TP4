@@ -99,6 +99,7 @@ public class Goban {
             plateau[x][y].setEtat(2);
             plateau[x][y].setLiberte(degreLib(x,y));
             plateau[x][y].setNumGroupe(0);//à faire
+            System.out.println(plateau[x][y].toString());
         }else
         {
             System.out.println("Erreur: la case est déjà occupé.");
@@ -115,29 +116,29 @@ public class Goban {
         } 
 
         if ((y + 1) < taille) {
-            if (plateau[x][y + 1].getEtat() == 1) {
+            if (plateau[x][y + 1].getEtat() == -1) {
                 compt++;
             }
         } 
  
         if ((x - 1) >= 0) {
-            if (plateau[x - 1][y].getEtat() == 1) {
+            if (plateau[x - 1][y].getEtat() == -1) {
                 compt++;
             }
-        } else {
-           compt++;
         }
+   
 
         if ((y - 1) >= 0) {
-            if (plateau[x][y - 1].getEtat() == 1) {
+            if (plateau[x][y - 1].getEtat() == -1) {
                compt++;
             }
         } 
-        return compt;       
-    }
+        return compt;    
+}
+    
     
 
-  public int calculLiberte(Groupe g) {
+  public int calculLiberte(Groupe g){
         int[][] gobanVirtuel = new int[19][19];
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 19; j++) {
