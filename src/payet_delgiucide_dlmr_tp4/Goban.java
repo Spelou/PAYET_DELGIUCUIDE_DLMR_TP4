@@ -24,23 +24,25 @@ public class Goban {
 // constructeur de Goban 
 //taille en paramètre supposée juste, intialise toutes les pierres à vide, initialise les pierres mortes à 0
     public Goban(int taille) {
-        //intialiser la taille du plateau
-        this.taille = taille;
+   //intialiser la taille du plateau
+        this.taille=taille;
         //initialisation plateau
         plateau = new Pierre[taille][taille];
         //création d'une pierre vide
-        Pierre pierreVide = new Pierre("O", -1, 0, -1, -1, -1);
+       
         //initialisation du terrain, on met des pierres vides partout
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) {
+                 Pierre pierreVide = new Pierre("O", -1, 0, -1);
                 plateau[i][j] = pierreVide;
+               // System.out.println(plateau[i][j].getEtat()); //juste pour vérifier
             }
         }
         //initialisation des pierres mortes
         pierreMorteB = 0;
         pierreMorteN = 0;
         //liste Groupe
-        listeGroupes = new ArrayList<Groupe>();
+        listeGroupes= new ArrayList<Groupe>();
     }
 
 // méthode d'affichage - écrit les numéros des colonnes ainsi que ceux des lignes 
