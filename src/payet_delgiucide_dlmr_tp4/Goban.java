@@ -92,14 +92,18 @@ public class Goban {
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre si case non vide, On attend encore la gestion des suicides...
         
-        if(estVide(x, y)) {
-                      
+        if(estVide(x, y)) { //vérification case vide
+            if(!(degreLib(x,y)==0)){   //vérification si liberte non nul        
             //Pierre nouvPierre = new Pierre(coul, 1, degreLib(x,y), listeGroupes.size());
             plateau[x][y].setCouleur(coul);
             plateau[x][y].setEtat(2);
             plateau[x][y].setLiberte(degreLib(x,y));
             plateau[x][y].setNumGroupe(0);//à faire
             System.out.println(plateau[x][y].toString());
+            }
+            else{
+                System.out.println("Interdit:(liberté=0) la case est prise ou alors le coup est inutile .");  // VERIFIER REGLE ET AJUSTER (confond mort et pris...)
+            }
         }else
         {
             System.out.println("Erreur: la case est déjà occupé.");
