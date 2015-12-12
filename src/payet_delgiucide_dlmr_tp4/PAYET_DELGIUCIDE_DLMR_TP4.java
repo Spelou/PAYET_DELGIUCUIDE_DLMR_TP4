@@ -5,8 +5,12 @@
  */
 package payet_delgiucide_dlmr_tp4;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,6 +23,10 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
      */
     public static void main(String[] args) {
         System.out.println("Bienvenue dans le jeu de go, création du Goban");
+        FenetreT fen =new FenetreT();
         Partie laPartie = new Partie();
         laPartie.CestPartie();
+        
+        
+}
 }
