@@ -24,25 +24,25 @@ public class Goban {
 // constructeur de Goban 
 //taille en paramètre supposée juste, intialise toutes les pierres à vide, initialise les pierres mortes à 0
     public Goban(int taille) {
-   //intialiser la taille du plateau
-        this.taille=taille;
+        //intialiser la taille du plateau
+        this.taille = taille;
         //initialisation plateau
         plateau = new Pierre[taille][taille];
         //création d'une pierre vide
-       
+
         //initialisation du terrain, on met des pierres vides partout
         for (int i = 0; i < taille; i++) {
             for (int j = 0; j < taille; j++) {
-                 Pierre pierreVide = new Pierre("O", -1, 0, -1);
+                Pierre pierreVide = new Pierre("O", -1, 0, -1);
                 plateau[i][j] = pierreVide;
-               // System.out.println(plateau[i][j].getEtat()); //juste pour vérifier
+                // System.out.println(plateau[i][j].getEtat()); //juste pour vérifier
             }
         }
         //initialisation des pierres mortes
         pierreMorteB = 0;
         pierreMorteN = 0;
         //liste Groupe
-        listeGroupes= new ArrayList<Groupe>();
+        listeGroupes = new ArrayList<Groupe>();
     }
 
 // méthode d'affichage - écrit les numéros des colonnes ainsi que ceux des lignes 
@@ -91,106 +91,112 @@ public class Goban {
 // supposés justes et qui met à jour son degré de liberté
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre si case non vide, On attend encore la gestion des suicides...
-        
-        if(estVide(x, y)) { //vérification case vide
-            if(!(degreLib(x,y)==0)){   //vérification si liberte non nul        
-            //Pierre nouvPierre = new Pierre(coul, 1, degreLib(x,y), listeGroupes.size());
-            plateau[x][y].setCouleur(coul);
-            plateau[x][y].setEtat(2);
-            plateau[x][y].setLiberte(degreLib(x,y));
-            plateau[x][y].setNumGroupe(0);//à faire
-            System.out.println(plateau[x][y].toString());
-            }
-            else{
+
+        if (estVide(x, y)) { //vérification case vide
+            if (!(degreLib(x, y) == 0)) {   //vérification si liberte non nul        
+                //Pierre nouvPierre = new Pierre(coul, 1, degreLib(x,y), listeGroupes.size());
+                plateau[x][y].setCouleur(coul);
+                plateau[x][y].setEtat(2);
+                plateau[x][y].setLiberte(degreLib(x, y));
+                plateau[x][y].setNumGroupe(0);//à faire
+                System.out.println(plateau[x][y].toString());
+            } else {
                 System.out.println("Interdit:(liberté=0) la case est prise ou alors le coup est inutile .");  // VERIFIER REGLE ET AJUSTER (confond mort et pris...)
             }
-        }else
-        {
+        } else {
             System.out.println("Erreur: la case est déjà occupé.");
         }
     }
+
     // méthode de calcul de degré de liberté d'une pierre.A vérifier ATTENTION elle est utiliser dans poserPierre
-    public int degreLib(int x,int y){
-        int compt=0;   //compte les libertes
- 
+    public int degreLib(int x, int y) {
+        int compt = 0;   //compte les libertes
+
         if ((x + 1) < taille) {
             if (plateau[x + 1][y].getEtat() == -1) {
                 compt++;
             }
-        } 
+        }
 
         if ((y + 1) < taille) {
             if (plateau[x][y + 1].getEtat() == -1) {
                 compt++;
             }
-        } 
- 
+        }
+
         if ((x - 1) >= 0) {
             if (plateau[x - 1][y].getEtat() == -1) {
                 compt++;
             }
         }
-   
 
         if ((y - 1) >= 0) {
             if (plateau[x][y - 1].getEtat() == -1) {
-               compt++;
+                compt++;
             }
-        } 
-        return compt;    
-}
-    
-    
+        }
+        return compt;
+    }
 
-  public int calculLiberte(Groupe g){
+    public int calculLiberte(Groupe g) {
         int[][] gobanVirtuel = new int[19][19];
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 19; j++) {
-                gobanVirtuel[i][j]=0;
-            }  
+                gobanVirtuel[i][j] = 0;
+            }
         }
         int lib = 0;
         for (int i = 0; i < g.getListePierres().size(); i++) {
             int a = g.getListePierres().get(i).getX();
             int b = g.getListePierres().get(i).getY();
-            if (plateau[a + 1][b].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a+1][b] == 0) {
-                    gobanVirtuel[a+1][b] = 1;
-                    lib = lib + 1;
+            if ((0 <= a + 1) && (a+1 <= this.taille)) {
+                if (plateau[a + 1][b].getCouleur().equalsIgnoreCase("O")) {
+                    if (gobanVirtuel[a + 1][b] == 0) {
+                        gobanVirtuel[a + 1][b] = 1;
+                        lib = lib + 1;
+                    }
                 }
             }
-            if (plateau[a - 1][b].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a-1][b] == 0) {
-                    gobanVirtuel[a-1][b] = 1;
-                    lib = lib + 1;
+            if ((0 <= a - 1) && (a-1 <= this.taille)) {
+                if (plateau[a - 1][b].getCouleur().equalsIgnoreCase("O")) {
+                    if (gobanVirtuel[a - 1][b] == 0) {
+                        gobanVirtuel[a - 1][b] = 1;
+                        lib = lib + 1;
+                    }
                 }
             }
-            if (plateau[a][b + 1].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a][b+1] == 0) {
-                    gobanVirtuel[a][b+1] = 1;
-                    lib = lib + 1;
+
+            if ((0 <= b + 1) && (b+1<= this.taille)) {
+                if (plateau[a][b + 1].getCouleur().equalsIgnoreCase("O")) {
+                    if (gobanVirtuel[a][b + 1] == 0) {
+                        gobanVirtuel[a][b + 1] = 1;
+                        lib = lib + 1;
+                    }
                 }
             }
-            if (plateau[a][b - 1].getCouleur().equalsIgnoreCase("O")) {
-                if (gobanVirtuel[a][b-1] == 0) {
-                    gobanVirtuel[a][b-1] = 1;
-                    lib = lib + 1;
+
+            if ((0 <= b - 1) && (b-1<= this.taille)) {
+                if (plateau[a][b - 1].getCouleur().equalsIgnoreCase("O")) {
+                    if (gobanVirtuel[a][b - 1] == 0) {
+                        gobanVirtuel[a][b - 1] = 1;
+                        lib = lib + 1;
+                    }
                 }
             }
         }
         g.setLiberte(lib);
         return lib;
-        
+
     }
 //méthode case vide qui renvoit vrai si la case est vide et faux sinon, 
 //on suppose les paramètres justes
 
     public boolean estVide(int x, int y) {
         boolean test = true;
-        
-            if (plateau[x][y].getEtat() == 1||plateau[x][y].getEtat() == 2||plateau[x][y].getEtat() == 0) {
-                test = false;
-            }
+
+        if (plateau[x][y].getEtat() == 1 || plateau[x][y].getEtat() == 2 || plateau[x][y].getEtat() == 0) {
+            test = false;
+        }
         return test;
     }
 //méthode no suicide renvoit 0 si la position demandée fait le suicide d'un groupe
@@ -303,7 +309,6 @@ public class Goban {
     }
 
     //getters
-
     public Pierre[][] getPlateau() {
         return plateau;
     }
