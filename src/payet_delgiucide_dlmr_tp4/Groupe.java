@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Romain
+ * @author Romain & Quentin P
  */
 public class Groupe {
 
@@ -52,13 +52,6 @@ public class Groupe {
             listePierres.add(p); // fusion des listes de pierres des 2 groupes
         } else {
             System.out.println("Erreur: impossible de fusionner 2 groupes de couleurs différentes.");
-        }
-    }
-
- 
-    public void calculLiberte() {
-        for (int i = 0; i < listePierres.size(); i++) {
-            liberte += listePierres.get(i).getLiberte();
         }
     }
 
