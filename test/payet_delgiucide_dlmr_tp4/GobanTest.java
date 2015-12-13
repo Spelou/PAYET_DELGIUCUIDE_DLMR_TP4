@@ -103,13 +103,8 @@ public class GobanTest {
     }
 
     /**
-     * Test of estVide method, of class Goban.
+     * Test of degreLib method, of class Goban.
      */
-    @Test
-    public void testEstVide() {
-        System.out.println("estVide");
-
-    }
     
      @Test
     public void testDegreLib() {
