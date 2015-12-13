@@ -22,7 +22,7 @@ public class GobanTest {
     public void testAfficher() {
         System.out.println("afficher");
         Goban monCrashGoban = new Goban(19);
-       // monCrashGoban.afficher();
+        // monCrashGoban.afficher();
     }
 
     /**
@@ -98,30 +98,27 @@ public class GobanTest {
         monGobanCrash.getPlateau()[4][1] = pierreN1;
         monGobanCrash.getPlateau()[4][2] = pierreN2;
         monGobanCrash.getPlateau()[4][3] = pierreN3;
-        assertEquals(monGobanCrash.calculLiberte(groupe1),7);
-        assertEquals(monGobanCrash.calculLiberte(groupe2),9);
-        assertEquals(monGobanCrash.calculLiberte(groupe3),7);
+        assertEquals(monGobanCrash.calculLiberte(groupe1), 7);
+        assertEquals(monGobanCrash.calculLiberte(groupe2), 9);
+        assertEquals(monGobanCrash.calculLiberte(groupe3), 7);
 
-        
         monGobanCrash.getPlateau()[3][3] = pierreB9;
         groupe1.fusion(groupe2);
         groupe1.fusion(groupe4);
-        assertEquals(monGobanCrash.calculLiberte(groupe1),13);
-        assertEquals(monGobanCrash.calculLiberte(groupe3),6);
-        
+        assertEquals(monGobanCrash.calculLiberte(groupe1), 13);
+        assertEquals(monGobanCrash.calculLiberte(groupe3), 6);
+
         monGobanCrash.getPlateau()[3][1] = pierreN4;
         groupe3.fusion(groupe5);
-        assertEquals(monGobanCrash.calculLiberte(groupe1),12);
-        assertEquals(monGobanCrash.calculLiberte(groupe3),6);
+        assertEquals(monGobanCrash.calculLiberte(groupe1), 12);
+        assertEquals(monGobanCrash.calculLiberte(groupe3), 6);
 
-        
     }
 
     /**
      * Test of degreLib method, of class Goban.
      */
-    
-     @Test
+    @Test
     public void testDegreLib() {
         System.out.println("degreLib");
         Goban monGobanCrash = new Goban(19);
@@ -144,12 +141,12 @@ public class GobanTest {
         monGobanCrash.getPlateau()[1][3] = pierreB5;
         monGobanCrash.getPlateau()[2][4] = pierreB6;
         monGobanCrash.getPlateau()[3][3] = pierreB7;
-        assertEquals(monGobanCrash.degreLib(1, 0),1);
-        assertEquals(monGobanCrash.degreLib(3, 1),3);
-        assertEquals(monGobanCrash.degreLib(1, 2),1);
-        assertEquals(monGobanCrash.degreLib(2, 3),0);
-        assertEquals(monGobanCrash.degreLib(2, 5),3);
-    
+        assertEquals(monGobanCrash.degreLib(1, 0), 1);
+        assertEquals(monGobanCrash.degreLib(3, 1), 3);
+        assertEquals(monGobanCrash.degreLib(1, 2), 1);
+        assertEquals(monGobanCrash.degreLib(2, 3), 0);
+        assertEquals(monGobanCrash.degreLib(2, 5), 3);
+
     }
 
     /**
@@ -158,6 +155,27 @@ public class GobanTest {
     @Test
     public void testNonSuicide() {
         System.out.println("nonSuicide");
+        Goban monGobanCrash = new Goban(9);
+        Pierre pierreB1 = new Pierre("B", 2, 3, 1, 2, 1);
+        Groupe groupe1 = new Groupe(1, pierreB1);
+        Pierre pierreB2 = new Pierre("B", 2, 1, 4, 1, 2);
+        Pierre pierreB3 = new Pierre("B", 2, 0, 1, 2, 3);
+        Pierre pierreB4 = new Pierre("B", 2, 2, 1, 3, 2);
+        groupe1.fusion(pierreB2);
+        groupe1.fusion(pierreB3);
+        groupe1.fusion(pierreB4);
+        
+        ArrayList mesGroupes = new ArrayList();
+        mesGroupes.add(groupe1);
+        monGobanCrash.setListeGroupes(mesGroupes);
+
+        // test
+        monGobanCrash.getPlateau()[2][1] = pierreB1;
+        monGobanCrash.getPlateau()[2][2] = pierreB2;
+        monGobanCrash.getPlateau()[2][3] = pierreB3;
+        monGobanCrash.getPlateau()[3][2] = pierreB4;
+        assertTrue(monGobanCrash.nonSuicide(2, 2, "B"));
+        assertEquals(monGobanCrash.nonSuicide(2, 2, "N"), false);
 
     }
 
@@ -186,7 +204,5 @@ public class GobanTest {
         System.out.println("estValide");
 
     }
-    
-  
 
 }
