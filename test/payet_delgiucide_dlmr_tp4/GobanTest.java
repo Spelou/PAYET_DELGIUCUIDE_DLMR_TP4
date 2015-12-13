@@ -198,24 +198,59 @@ public class GobanTest {
     @Test
     public void testMettreAJourGroupe() {
         System.out.println("mettreAJourGroupe");
-    }
+        Goban monGobanCrash=new Goban(19);
+        
+        Pierre pierreB1 = new Pierre("B", 2, 4, 1, 5, 4);
+        Groupe groupe1 = new Groupe(1, pierreB1);
 
-    /**
-     * Test of mettreAJourDeg method, of class Goban.
-     */
-    @Test
-    public void testMettreAJourDeg() {
-        System.out.println("mettreAJourDeg");
-
-    }
-
-    /**
-     * Test of estValide method, of class Goban.
-     */
-    @Test
-    public void testEstValide() {
-        System.out.println("estValide");
-
+        Pierre pierreB2 = new Pierre("B", 2, 4, 2, 5, 6);
+        Groupe groupe2 = new Groupe(2, pierreB2);
+        
+        Pierre pierreB3 = new Pierre("B", 2, 4, 3, 4, 5);
+        Groupe groupe3 = new Groupe(3, pierreB3);
+        
+        Pierre pierreN1= new Pierre("N", 2, 4, 4, 6, 5);
+        Groupe groupe4 = new Groupe(4, pierreN1);
+        
+        Pierre pierreB4= new Pierre("B", 2, 4, 8, 5, 5);
+        
+        ArrayList mesGroupes = new ArrayList();
+        mesGroupes.add(groupe1);
+        mesGroupes.add(groupe2);
+        mesGroupes.add(groupe3);
+        mesGroupes.add(groupe4);
+        monGobanCrash.setListeGroupes(mesGroupes);
+        
+        monGobanCrash.getPlateau()[5][4] = pierreB1;
+        monGobanCrash.getPlateau()[5][6] = pierreB2;
+        monGobanCrash.getPlateau()[4][5] = pierreB3;
+        monGobanCrash.getPlateau()[6][5] = pierreN1;
+        monGobanCrash.getPlateau()[5][5] = pierreB4;
+        
+        monGobanCrash.mettreAJourGroupe(5,5,"B");
+        
+        // vérification des degrés de liberté des pierres 
+      assertEquals(pierreB1.getLiberte(),3);
+        assertEquals(pierreB2.getLiberte(),3);
+        assertEquals(pierreB3.getLiberte(),3);
+        assertEquals(pierreN1.getLiberte(),3);
+        assertEquals(pierreB4.getLiberte(),0); 
+        
+        // vérification de la fusion des groupes 1, 2 et 3.
+        //1. bonne taille de la liste de groupes
+        assertEquals(monGobanCrash.getListeGroupes().size(),2);
+        //2. bon numéro pour le nouveau groupe
+        assertEquals(monGobanCrash.getPlateau()[5][5].getNumGroupe(),5);
+        assertEquals(monGobanCrash.getPlateau()[5][4].getNumGroupe(),5);
+        assertEquals(monGobanCrash.getPlateau()[5][6].getNumGroupe(),5);
+        assertEquals(monGobanCrash.getPlateau()[4][5].getNumGroupe(),5);
+        assertEquals(monGobanCrash.getPlateau()[6][5].getNumGroupe(),4);
+        //3.vérification des numéros de groupe des pierres
+        assertEquals(pierreB1.getNumGroupe(),5);
+        assertEquals(pierreB2.getNumGroupe(),5);
+        assertEquals(pierreB3.getNumGroupe(),5);
+        assertEquals(pierreN1.getNumGroupe(),4);
+        assertEquals(pierreB4.getNumGroupe(),5);        
     }
 
 }
