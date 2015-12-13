@@ -156,27 +156,40 @@ public class GobanTest {
     public void testNonSuicide() {
         System.out.println("nonSuicide");
         Goban monGobanCrash = new Goban(9);
+        
+       //la pose d'une pierre dans un oeil n'est pas traitée, on vérifie cela simplement 
+       // avec la méthode degLiberte. 
         Pierre pierreB1 = new Pierre("B", 2, 3, 1, 2, 1);
         Groupe groupe1 = new Groupe(1, pierreB1);
-        Pierre pierreB2 = new Pierre("B", 2, 1, 4, 1, 2);
-        Pierre pierreB3 = new Pierre("B", 2, 0, 1, 2, 3);
+        Pierre pierreB2 = new Pierre("B", 2, 1, 1, 1, 2);
+        Pierre pierreB3 = new Pierre("B", 2, 0, 1, 2, 4);
         Pierre pierreB4 = new Pierre("B", 2, 2, 1, 3, 2);
+        Pierre pierreB5 = new Pierre("B", 2, 0, 1, 1, 3);
+        Pierre pierreB6 = new Pierre("B", 2, 2, 1, 3, 3);
         groupe1.fusion(pierreB2);
         groupe1.fusion(pierreB3);
         groupe1.fusion(pierreB4);
+        groupe1.fusion(pierreB5);
+        groupe1.fusion(pierreB6);
+        
+        Pierre pierreN1 = new Pierre("B", 2, 3, 2, 2, 1);
+        Groupe groupe2 = new Groupe(2, pierreN1);
+ 
         
         ArrayList mesGroupes = new ArrayList();
         mesGroupes.add(groupe1);
         monGobanCrash.setListeGroupes(mesGroupes);
 
-        // test
         monGobanCrash.getPlateau()[2][1] = pierreB1;
-        monGobanCrash.getPlateau()[2][2] = pierreB2;
-        monGobanCrash.getPlateau()[2][3] = pierreB3;
+        monGobanCrash.getPlateau()[1][2] = pierreB2;
+        monGobanCrash.getPlateau()[2][4] = pierreB3;
         monGobanCrash.getPlateau()[3][2] = pierreB4;
-        assertTrue(monGobanCrash.nonSuicide(2, 2, "B"));
-        assertEquals(monGobanCrash.nonSuicide(2, 2, "N"), false);
-
+        monGobanCrash.getPlateau()[1][3] = pierreB5;
+        monGobanCrash.getPlateau()[3][3] = pierreB6;
+        monGobanCrash.getPlateau()[2][2] = pierreN1;
+        
+        assertTrue(monGobanCrash.nonSuicide(2, 3, "B"));
+        assertEquals((monGobanCrash.nonSuicide(2, 3, "N")),false);
     }
 
     /**
