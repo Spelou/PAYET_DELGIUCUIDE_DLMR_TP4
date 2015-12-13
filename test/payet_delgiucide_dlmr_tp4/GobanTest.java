@@ -71,15 +71,19 @@ public class GobanTest {
         Pierre pierreN3 = new Pierre("N", 2, 1, 3, 4, 3);
         groupe3.fusion(pierreN3);
 
-        // Groupe d'une seule pierre blanche qui simule la pierre posée sur le goban
+        // Groupe d'une seule pierre blanche qui simule la pose d'une pierre blanche sur le goban
         Pierre pierreB9 = new Pierre("B", 2, 1, 4, 3, 3);
-        Groupe groupe4 = new Groupe(5, pierreB9);
+        Groupe groupe4 = new Groupe(4, pierreB9);
+        // Groupe d'une seule pierre noire qui simule la pose d'une pierre noire sur le goban
+        Pierre pierreN4 = new Pierre("N", 2, 1, 5, 3, 1);
+        Groupe groupe5 = new Groupe(5, pierreN4);
 
         ArrayList mesGroupes = new ArrayList();
         mesGroupes.add(groupe1);
         mesGroupes.add(groupe2);
         mesGroupes.add(groupe3);
         mesGroupes.add(groupe4);
+        mesGroupes.add(groupe5);
         monGobanCrash.setListeGroupes(mesGroupes);
 
         // test
@@ -94,12 +98,23 @@ public class GobanTest {
         monGobanCrash.getPlateau()[4][1] = pierreN1;
         monGobanCrash.getPlateau()[4][2] = pierreN2;
         monGobanCrash.getPlateau()[4][3] = pierreN3;
-        System.out.println(monGobanCrash.getPlateau()[4][3].getCouleur());
         assertEquals(monGobanCrash.calculLiberte(groupe1),7);
         assertEquals(monGobanCrash.calculLiberte(groupe2),9);
         assertEquals(monGobanCrash.calculLiberte(groupe3),7);
 
-        // monGobanCrash.getPlateau()[2][1] = pierreB9;
+        
+        monGobanCrash.getPlateau()[3][3] = pierreB9;
+        groupe1.fusion(groupe2);
+        groupe1.fusion(groupe4);
+        assertEquals(monGobanCrash.calculLiberte(groupe1),13);
+        assertEquals(monGobanCrash.calculLiberte(groupe3),6);
+        
+        monGobanCrash.getPlateau()[3][1] = pierreN4;
+        groupe3.fusion(groupe5);
+        assertEquals(monGobanCrash.calculLiberte(groupe1),12);
+        assertEquals(monGobanCrash.calculLiberte(groupe3),6);
+
+        
     }
 
     /**
