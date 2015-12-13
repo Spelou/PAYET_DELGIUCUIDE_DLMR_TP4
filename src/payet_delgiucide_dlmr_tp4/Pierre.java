@@ -28,6 +28,15 @@ public class Pierre {
         this.numGroupe=groupNumber;
     }
     
+    public Pierre(String color, int state, int liberty, int groupNumber, int x, int y){
+        this.couleur=color;
+        this.etat=state;
+        this.liberte=liberty;
+        this.numGroupe=groupNumber;
+        this.x=x;
+        this.y=y;
+    }
+    
     
     
     /**
