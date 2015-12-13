@@ -109,6 +109,10 @@ public class Goban {
     }
 
     // méthode de calcul de degré de liberté d'une pierre.A vérifier ATTENTION elle est utiliser dans poserPierre
+    // Commentaire de Quentin P: cette méthode est à reprendre, elle ne donne pas d'info utile pour la méthode poser pierre. Il faut
+    // en sortie que l'on puisse si la pierre est entourée par des pierres blanches et/ou noires pour gérer le suicide d'une
+    // seule pierre. En effet le degré de liberté peut être nul mais si on est blanc et que l'on est entouré par
+    // des pierres blanches jouer à cet endroit est possible ! 
     public int degreLib(int x, int y) {
         int compt = 0;   //compte les libertes
 
