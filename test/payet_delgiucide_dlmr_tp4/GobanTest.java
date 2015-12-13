@@ -110,6 +110,37 @@ public class GobanTest {
         System.out.println("estVide");
 
     }
+    
+     @Test
+    public void testDegreLib() {
+        System.out.println("degreLib");
+        Goban monGobanCrash = new Goban(19);
+        // initialisation d'un groupe de pierres blanches de test
+        Pierre pierreB1 = new Pierre("B", 2, 2, 1, 0, 0);
+        Groupe groupe1 = new Groupe(1, pierreB1);
+        Pierre pierreB2 = new Pierre("B", 2, 3, 1, 1, 1);
+        Pierre pierreB3 = new Pierre("B", 2, 3, 1, 2, 2);
+        Pierre pierreB4 = new Pierre("B", 2, 2, 1, 2, 1);
+        Pierre pierreB5 = new Pierre("B", 2, 4, 1, 1, 3);
+        Pierre pierreB6 = new Pierre("B", 2, 4, 1, 2, 4);
+        Pierre pierreB7 = new Pierre("B", 2, 4, 1, 3, 3);
+        groupe1.fusion(pierreB2);
+        groupe1.fusion(pierreB3);
+        groupe1.fusion(pierreB4);
+        monGobanCrash.getPlateau()[0][0] = pierreB1;
+        monGobanCrash.getPlateau()[1][1] = pierreB2;
+        monGobanCrash.getPlateau()[2][2] = pierreB3;
+        monGobanCrash.getPlateau()[2][1] = pierreB4;
+        monGobanCrash.getPlateau()[1][3] = pierreB5;
+        monGobanCrash.getPlateau()[2][4] = pierreB6;
+        monGobanCrash.getPlateau()[3][3] = pierreB7;
+        assertEquals(monGobanCrash.degreLib(1, 0),1);
+        assertEquals(monGobanCrash.degreLib(3, 1),3);
+        assertEquals(monGobanCrash.degreLib(1, 2),1);
+        assertEquals(monGobanCrash.degreLib(2, 3),0);
+        assertEquals(monGobanCrash.degreLib(2, 5),3);
+    
+    }
 
     /**
      * Test of nonSuicide method, of class Goban.
@@ -145,5 +176,7 @@ public class GobanTest {
         System.out.println("estValide");
 
     }
+    
+  
 
 }
