@@ -229,6 +229,7 @@ public class Goban {
         Pierre nouvPierre = plateau[x][y];
         //initialisation du groupe associé à la pierre
         Groupe nouvGroupe = new Groupe(maxNumGroupe() + 1, nouvPierre);
+        nouvPierre.setNumGroupe(nouvGroupe.getNumGroupe());
         //ajouter le groupe à la liste
         listeGroupes.add(nouvGroupe);
         //il faut regarder les groupes aux alentours
