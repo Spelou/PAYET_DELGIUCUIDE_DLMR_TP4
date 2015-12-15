@@ -37,7 +37,7 @@ public class Groupe {
             for (int i = 0; i < g.listePierres.size(); i++) { //On change le numéro de groupe de chaque pierre du groupe qui va être supprimé.
                 g.listePierres.get(i).setNumGroupe(this.numGroupe);
             }
-            listePierres.addAll(g.listePierres); // fusion des listes de pierres des 2 groupe
+            listePierres.addAll(g.getListePierres()); // fusion des listes de pierres des 2 groupe
 
             g = null;  //suppression du groupe en paramétre. Le garbage collector s'occupe du reste (Vive Java)
 
@@ -49,6 +49,7 @@ public class Groupe {
     //ajout d'une pierre à un groupe
     public void fusion(Pierre p) {
         if (p.getCouleur().equals(this.couleur)) {
+            p.setNumGroupe(numGroupe);
             listePierres.add(p); // fusion des listes de pierres des 2 groupes
         } else {
             System.out.println("Erreur: impossible de fusionner 2 groupes de couleurs différentes.");
