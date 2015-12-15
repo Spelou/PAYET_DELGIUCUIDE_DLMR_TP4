@@ -16,16 +16,6 @@ import static org.junit.Assert.*;
 public class GobanTest {
 
     /**
-     * Test of afficher method, of class Goban.
-     */
-    @Test
-    public void testAfficher() {
-        System.out.println("afficher");
-        Goban monCrashGoban = new Goban(19);
-        // monCrashGoban.afficher();
-    }
-
-    /**
      * Test of poserPierre method, of class Goban.
      */
     @Test
