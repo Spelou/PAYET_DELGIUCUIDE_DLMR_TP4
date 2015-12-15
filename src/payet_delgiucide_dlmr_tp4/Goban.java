@@ -141,7 +141,15 @@ public class Goban {
         }
         return compt;
     }
-
+/**
+ * 
+ * @param g groupe dont on souhaite calculer le nombre de libertés.
+ * @return le nombre de libertés du groupe
+ * la méthode se base sur la création d'une matrice d'entier 19*19 initialement nulle.
+ * On parcourt les cases voisines des pierres du groupe, si une case est vide
+ * on inscrit 1 dans la matrice et on incrémente un compteur. Si il y a déjà un 1 dans la matrice
+ * on examine la case ou la pierre suivante.
+ */
     public int calculLiberte(Groupe g) {
         int[][] gobanVirtuel = new int[19][19];
         for (int i = 0; i < 19; i++) {
