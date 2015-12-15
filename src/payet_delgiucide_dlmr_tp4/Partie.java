@@ -54,6 +54,13 @@ public class Partie {
         } 
     }
     
+    public Partie(Joueur j1, Joueur j2, Goban gob, int taille) {
+          this.J1=j1;
+          this.J2=j2;
+          this.gob=gob;
+          this.taille=taille;
+}
+    
     /**
      * La partie, les joueurs jouent à tour de rôle.
      */

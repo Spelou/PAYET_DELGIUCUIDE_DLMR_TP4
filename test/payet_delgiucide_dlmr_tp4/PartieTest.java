@@ -9,6 +9,9 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -25,7 +28,8 @@ public class PartieTest {
         Joueur j1=new Joueur("Romain","N");
         Joueur j2=new Joueur("Quentin","B");
         Goban gob=new Goban(19);
-        
+        Partie maPartie=new Partie();
+        // test de la méthode nouvelle partie.
     }
     
 }
