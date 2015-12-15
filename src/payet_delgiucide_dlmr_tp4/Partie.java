@@ -81,6 +81,7 @@ public class Partie {
             while (test) {
                 test = false; //on pourra sortir
                 x = scan2.nextInt();
+                System.out.println(x);
                 if (!((x >= -1) && (x < taille))) {
                     test = true;  //on recommence
                     System.out.println("Erreur: valeur de x hors goban (x>=-1 et x<" + taille + "). Recommencez\nx= ");
@@ -93,6 +94,7 @@ public class Partie {
                 test = false; //on pourra sortir
                 System.out.println("y= ");
                 y = scan2.nextInt();
+                System.out.println(y);
                 if (!((y >= -1) && (y < taille))) {
                     test = true;  //on recommence
                     System.out.println("Erreur: valeur de y hors goban (y>=-1 et y<" + taille + "). Recommencez");

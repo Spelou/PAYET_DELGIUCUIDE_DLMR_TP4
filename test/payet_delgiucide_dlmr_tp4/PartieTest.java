@@ -32,16 +32,17 @@ public class PartieTest {
     @Rule
     public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
 
-    /*  @Test
+    @Test
      public void testNouvellePartie() {
      System.out.println("NouvellePartie");
      Joueur j1 = new Joueur("Romain", "N");
      Joueur j2 = new Joueur("Quentin", "B");
      Goban gob = new Goban(19);
      Partie maPartie = new Partie(j1, j2, gob, 19);
+     systemInMock.provideText("1");
      maPartie.NouvellePartie();
-
-     Cette méthode d'utilisation d'un robot ne semble pas fonctionner
+ 
+    /* Cette méthode d'utilisation d'un robot ne semble pas fonctionner
      try {
      Robot robot = new Robot();
      robot.setAutoDelay(40);
@@ -61,8 +62,9 @@ public class PartieTest {
      e.printStackTrace();
      }
          
+     }*/
+     
      }
-
      /**
      * Test d'une prise en compte d'une entrée par System.in
      */
