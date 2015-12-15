@@ -12,24 +12,44 @@ import static org.junit.Assert.*;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.Scanner;
 
 /**
  *
  * @author USER
  */
 public class PartieTest {
-    
+
     /**
      * Test of CestPartie method, of class Partie.
      */
     @Test
     public void testNouvellePartie() {
         System.out.println("NouvellePartie");
-        Joueur j1=new Joueur("Romain","N");
-        Joueur j2=new Joueur("Quentin","B");
-        Goban gob=new Goban(19);
-        Partie maPartie=new Partie();
+        Joueur j1 = new Joueur("Romain", "N");
+        Joueur j2 = new Joueur("Quentin", "B");
+        Goban gob = new Goban(19);
+        Partie maPartie = new Partie(j1, j2, gob, 19);
+        maPartie.NouvellePartie();
+        try {
+            Robot robot = new Robot();
+            robot.setAutoDelay(40);
+            robot.setAutoWaitForIdle(true);
+            robot.delay(500);
+            robot.keyPress(KeyEvent.VK_1);
+            robot.delay(500);
+            Scanner scan2 = new Scanner(System.in);
+            int x=scan2.nextInt();
+            System.out.println(x);
+            robot.keyRelease(KeyEvent.VK_1);
+            robot.delay(500);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.delay(500);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
         // test de la méthode nouvelle partie.
     }
-    
+
 }
