@@ -33,39 +33,39 @@ public class PartieTest {
     public final TextFromStandardInputStream systemInMock = emptyStandardInputStream();
 
     @Test
-     public void testNouvellePartie() {
-     System.out.println("NouvellePartie");
-     Joueur j1 = new Joueur("Romain", "N");
-     Joueur j2 = new Joueur("Quentin", "B");
-     Goban gob = new Goban(19);
-     Partie maPartie = new Partie(j1, j2, gob, 19);
-     systemInMock.provideText("1");
-     maPartie.NouvellePartie();
- 
-    /* Cette méthode d'utilisation d'un robot ne semble pas fonctionner
-     try {
-     Robot robot = new Robot();
-     robot.setAutoDelay(40);
-     robot.setAutoWaitForIdle(true);
-     robot.delay(500);
-     robot.keyPress(KeyEvent.VK_1);
-     robot.delay(500);
-     Scanner scan2 = new Scanner(System.in);
-     int x=scan2.nextInt();
-     System.out.println(x);
-     robot.keyRelease(KeyEvent.VK_1);
-     robot.delay(500);
-     robot.keyPress(KeyEvent.VK_ENTER);
-     robot.delay(500);
-     robot.keyRelease(KeyEvent.VK_ENTER);
-     } catch (AWTException e) {
-     e.printStackTrace();
-     }
+    public void testNouvellePartie() {
+        System.out.println("NouvellePartie");
+        Joueur j1 = new Joueur("Romain", "N");
+        Joueur j2 = new Joueur("Quentin", "B");
+        Goban gob = new Goban(19);
+        Partie maPartie = new Partie(j1, j2, gob, 19);
+        systemInMock.provideLines("1\n", "3\n", "1\n", "4\n");
+        maPartie.NouvellePartie();
+
+        /* Cette méthode d'utilisation d'un robot ne semble pas fonctionner
+         try {
+         Robot robot = new Robot();
+         robot.setAutoDelay(40);
+         robot.setAutoWaitForIdle(true);
+         robot.delay(500);
+         robot.keyPress(KeyEvent.VK_1);
+         robot.delay(500);
+         Scanner scan2 = new Scanner(System.in);
+         int x=scan2.nextInt();
+         System.out.println(x);
+         robot.keyRelease(KeyEvent.VK_1);
+         robot.delay(500);
+         robot.keyPress(KeyEvent.VK_ENTER);
+         robot.delay(500);
+         robot.keyRelease(KeyEvent.VK_ENTER);
+         } catch (AWTException e) {
+         e.printStackTrace();
+         }
          
-     }*/
-     
-     }
-     /**
+         }*/
+    }
+
+    /**
      * Test d'une prise en compte d'une entrée par System.in
      */
     @Test

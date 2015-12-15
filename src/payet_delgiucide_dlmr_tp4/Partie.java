@@ -148,8 +148,8 @@ public class Partie {
     }
 
     /* 
-    Méthode de test de la librairie system rules
-    */
+     Méthode de test de la librairie system rules
+     */
     public static int sumOfNumbersFromSystemIn() {
         Scanner scanner = new Scanner(System.in);
         int firstSummand = scanner.nextInt();
