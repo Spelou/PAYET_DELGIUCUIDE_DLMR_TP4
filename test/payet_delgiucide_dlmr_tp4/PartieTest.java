@@ -21,7 +21,11 @@ public class PartieTest {
      */
     @Test
     public void testNouvellePartie() {
-        System.out.println("CestPartie");
+        System.out.println("NouvellePartie");
+        Joueur j1=new Joueur("Romain","N");
+        Joueur j2=new Joueur("Quentin","B");
+        Goban gob=new Goban(19);
+        
     }
     
 }

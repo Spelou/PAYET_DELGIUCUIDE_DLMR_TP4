@@ -44,7 +44,7 @@ public class Partie {
         while (test) {
             System.out.println("Entrer la taille du goban (9,16,19):"); // on demande les données à l'utilisateur
             int choix = myScan.nextInt();
-            taille = choix;
+            this.taille = choix;
             if ((choix == 9) || (choix == 16) || (choix == 19)) {
                 test = false; // sortie de boucle
                gob = new Goban(taille);
