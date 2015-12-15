@@ -363,5 +363,6 @@ public class Goban {
     public void setPierreMorteN(int pierreMorteN) {
         this.pierreMorteN = pierreMorteN;
     }
+    
 
 }
