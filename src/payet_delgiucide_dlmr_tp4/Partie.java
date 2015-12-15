@@ -57,7 +57,7 @@ public class Partie {
     /**
      * La partie, les joueurs jouent à tour de rôle.
      */
-    public void CestPartie(){
+    public void NouvellePartie(){
          System.out.println("Et que la partie commence, honneur à "+J1.getNom()+" :");
         Scanner scan2 = new Scanner(System.in); //pour lire les coordonnées x et y
         int x=0;

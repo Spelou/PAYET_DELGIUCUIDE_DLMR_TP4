@@ -66,7 +66,7 @@ public class Goban {
         }
         System.out.println("");
 
-        //affichage du numéro de ligne puis des pierre vivnates contenues dans la matrice
+        //affichage du numéro de ligne puis des pierre vivantes contenues dans la matrice
         for (int j = 0; j < taille; j++) {
             // affichage avec décalage
             if (j < 10) {

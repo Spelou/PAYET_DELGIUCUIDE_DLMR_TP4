@@ -25,7 +25,7 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
         System.out.println("Bienvenue dans le jeu de go, création du Goban");
         FenetreT fen =new FenetreT();
         Partie laPartie = new Partie();
-        laPartie.CestPartie();
+        laPartie.NouvellePartie();
         
         
 }
