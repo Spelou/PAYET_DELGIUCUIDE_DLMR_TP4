@@ -201,20 +201,27 @@ public class Goban {
         return lib;
 
     }
-//méthode case vide qui renvoit vrai si la case est vide et faux sinon, 
-//on suppose les paramètres justes
 
+    
+    
+    /*Parametres: entiers x et y supposés corrects
+   Résultat booléen
+   Si la case est occupée on renvoit faux
+   Sinon on renvoit Vrai*/
     public boolean estVide(int x, int y) {
         boolean test = true;
-
-        if (plateau[x][y].getEtat() == 1 || plateau[x][y].getEtat() == 2 || plateau[x][y].getEtat() == 0) {
+        //vérification si la pierre est morte ou non, si elle est prise on peut toujours jouer dessus dans le cas de l'oeil
+        if (plateau[x][y].getEtat() == 2 || plateau[x][y].getEtat() == 0) {
             test = false;
         }
         return test;
     }
-//méthode no suicide renvoit 0 si la position demandée fait le suicide d'un groupe
-//la méthode renvoit vrai si pas de suicide faux sinon
 
+/*Parametres: entiers x et y , chaine de caractère couleur (une lettre) ces paramètres sont suposés vrais
+   Résultat booléen
+   Si le placement d'une pierre de telle couleur provoque le suicide du groupe qui lui est associé
+   Alors on renvoit faux
+   Sinon on renvoit Vrai*/
     public boolean nonSuicide(int x, int y, String coul) {
         boolean test = true;
         //On stocke l'actuelle liste de groupe
@@ -230,9 +237,18 @@ public class Goban {
         listeGroupes.equals(ancienneListe);
         return test;
     }
-//mettre à jour groupe méthode qui prend en argument deux entiers et une couleur et qui regarde si 
-//la pierre appartient à un ancien groupe, fait la jointure de 2 groupes, ou forme un groupe seul (les paramètres sont considérés comme juste)
+    
+   /*Parametres: entiers x et y, chaine de caractère supposée correct
+   Résultat booléen
+   Si la pose provoque une situation de KO on renvoit faux
+   Sinon on renvoit Vrai*/
+    public boolean nonKO(int x,int y,String coul){
+        boolean test=true;
+        return test;
+    }
 
+//mettre à jour groupe méthode qui prend en argument deux entiers et une couleur et qui regarde si 
+//la pierre appartient à un ancien groupe, fait la jointure de 2 groupes, ou forme un groupe seul (les paramètres sont considérés comme juste
     public void mettreAJourGroupe(int x, int y, String coul) {
         //récupération de la pierre associée
         Pierre nouvPierre = plateau[x][y];
@@ -292,12 +308,20 @@ public class Goban {
         return degLiberte;
     }
 
-    //vérification de la validité des champs d'entrée : x et y entre 0 et taille-1 et coul = B ou N
-    public boolean estValide(int x, int y, String coul) {
+    /*Parametres: entiers x et y
+    Résultat booléen
+    Si x et y sont dans [-1,taille] on renvoit faux
+    Si x=-1 et pas y ou le contraire on renvoit faux
+    Sinon on renvoit vrai*/
+    public boolean estValideCoord(int x, int y) {
         boolean test = true;
-        //condition de validité sur x,y et la couleur
-        if ((x < 0) || (x >= taille) || (y < 0) || (y >= taille) || (!(coul.equals("B") || coul.equals("N"))) || (!nonSuicide(x, y, coul))) {
+        //condition de validité sur x,y 
+        if ((x < -1) || (x >= taille) || (y < -1) || (y >= taille)) {
             test = false;
+        }
+        //condition de validité pour passer son tour
+        if(((x==-1)&&(y!=-1))||((x!=-1)&&(y==1))){
+            test= false;
         }
         return test;
     }
