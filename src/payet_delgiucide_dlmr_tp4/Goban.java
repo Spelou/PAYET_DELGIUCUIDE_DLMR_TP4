@@ -93,18 +93,14 @@ public class Goban {
         //ajout de la pierre si case non vide, On attend encore la gestion des suicides...
 
         if (estVide(x, y)) { //vérification case vide
-            if (!(degreLib(x, y) == 0)) {   //vérification si liberte non nul        
-                //Pierre nouvPierre = new Pierre(coul, 1, degreLib(x,y), listeGroupes.size());
-                plateau[x][y].setCouleur(coul);
-                plateau[x][y].setEtat(2);
-                plateau[x][y].setLiberte(degreLib(x, y));
-                plateau[x][y].setNumGroupe(0);//à faire
-                System.out.println(plateau[x][y].toString());
-            } else {
-                System.out.println("Interdit:(liberté=0) la case est prise ou alors le coup est inutile .");  // VERIFIER REGLE ET AJUSTER (confond mort et pris...)
-            }
+            Pierre nouvPierre= new Pierre(coul,2,0,maxNumGroupe()+1,x,y);
+            nouvPierre.setLiberte(degreLib(x,y));
+            Groupe nouvGroupe= new Groupe(maxNumGroupe()+1,nouvPierre);
+            nouvGroupe.setLiberte(this.calculLiberte(nouvGroupe));
+            listeGroupes.add(nouvGroupe);
+            plateau[x][y]=nouvPierre;
         } else {
-            System.out.println("Erreur: la case est déjà occupé.");
+            System.out.println("Erreur méthode poser Pierre: la case est déjà occupé.");
         }
     }
 
@@ -117,40 +113,41 @@ public class Goban {
         int compt = 0;   //compte les libertes
 
         if ((x + 1) < taille) {
-            if ((plateau[x + 1][y].getEtat() == -1)||(plateau[x + 1][y].getEtat() == 1)) {
+            if ((plateau[x + 1][y].getEtat() == -1) || (plateau[x + 1][y].getEtat() == 1)) {
                 compt++;
             }
         }
 
         if ((y + 1) < taille) {
-            if ((plateau[x][y + 1].getEtat() == -1)||(plateau[x][y + 1].getEtat() == 1)) {
+            if ((plateau[x][y + 1].getEtat() == -1) || (plateau[x][y + 1].getEtat() == 1)) {
                 compt++;
             }
         }
 
         if ((x - 1) >= 0) {
-            if ((plateau[x - 1][y].getEtat() == -1)||(plateau[x - 1][y].getEtat() == 1)) {
+            if ((plateau[x - 1][y].getEtat() == -1) || (plateau[x - 1][y].getEtat() == 1)) {
                 compt++;
             }
         }
 
         if ((y - 1) >= 0) {
-            if ((plateau[x][y - 1].getEtat() == -1)||(plateau[x][y - 1].getEtat() == 1)) {
+            if ((plateau[x][y - 1].getEtat() == -1) || (plateau[x][y - 1].getEtat() == 1)) {
                 compt++;
             }
         }
         return compt;
     }
-/**
- * 
- * @param g groupe dont on souhaite calculer le nombre de libertés.
- * @return le nombre de libertés du groupe
- * la méthode se base sur la création d'une matrice d'entier 19*19 initialement nulle.
- * On parcourt les cases voisines des pierres du groupe, si une case est vide
- * on inscrit 1 dans la matrice et on incrémente un compteur. Si il y a déjà un 1 dans la matrice
- * on examine la case ou la pierre suivante.
- *
- */
+
+    /**
+     *
+     * @param g groupe dont on souhaite calculer le nombre de libertés.
+     * @return le nombre de libertés du groupe la méthode se base sur la
+     * création d'une matrice d'entier 19*19 initialement nulle. On parcourt les
+     * cases voisines des pierres du groupe, si une case est vide on inscrit 1
+     * dans la matrice et on incrémente un compteur. Si il y a déjà un 1 dans la
+     * matrice on examine la case ou la pierre suivante.
+     *
+     */
     public int calculLiberte(Groupe g) {
         int[][] gobanVirtuel = new int[19][19];
         for (int i = 0; i < 19; i++) {
@@ -162,7 +159,7 @@ public class Goban {
         for (int i = 0; i < g.getListePierres().size(); i++) {
             int a = g.getListePierres().get(i).getX();
             int b = g.getListePierres().get(i).getY();
-            if ((0 <= a + 1) && (a+1 <= this.taille)) {
+            if ((0 <= a + 1) && (a + 1 <= this.taille)) {
                 if (plateau[a + 1][b].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a + 1][b] == 0) {
                         gobanVirtuel[a + 1][b] = 1;
@@ -170,7 +167,7 @@ public class Goban {
                     }
                 }
             }
-            if ((0 <= a - 1) && (a-1 <= this.taille)) {
+            if ((0 <= a - 1) && (a - 1 <= this.taille)) {
                 if (plateau[a - 1][b].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a - 1][b] == 0) {
                         gobanVirtuel[a - 1][b] = 1;
@@ -179,7 +176,7 @@ public class Goban {
                 }
             }
 
-            if ((0 <= b + 1) && (b+1<= this.taille)) {
+            if ((0 <= b + 1) && (b + 1 <= this.taille)) {
                 if (plateau[a][b + 1].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a][b + 1] == 0) {
                         gobanVirtuel[a][b + 1] = 1;
@@ -188,7 +185,7 @@ public class Goban {
                 }
             }
 
-            if ((0 <= b - 1) && (b-1<= this.taille)) {
+            if ((0 <= b - 1) && (b - 1 <= this.taille)) {
                 if (plateau[a][b - 1].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a][b - 1] == 0) {
                         gobanVirtuel[a][b - 1] = 1;
@@ -202,12 +199,10 @@ public class Goban {
 
     }
 
-    
-    
     /*Parametres: entiers x et y supposés corrects
-   Résultat booléen
-   Si la case est occupée on renvoit faux
-   Sinon on renvoit Vrai*/
+     Résultat booléen
+     Si la case est occupée on renvoit faux
+     Sinon on renvoit Vrai*/
     public boolean estVide(int x, int y) {
         boolean test = true;
         //vérification si la pierre est morte ou non, si elle est prise on peut toujours jouer dessus dans le cas de l'oeil
@@ -217,11 +212,11 @@ public class Goban {
         return test;
     }
 
-/*Parametres: entiers x et y , chaine de caractère couleur (une lettre) ces paramètres sont suposés vrais
-   Résultat booléen
-   Si le placement d'une pierre de telle couleur provoque le suicide du groupe qui lui est associé
-   Alors on renvoit faux
-   Sinon on renvoit Vrai*/
+    /*Parametres: entiers x et y , chaine de caractère couleur (une lettre) ces paramètres sont suposés vrais
+     Résultat booléen
+     Si le placement d'une pierre de telle couleur provoque le suicide du groupe qui lui est associé
+     Alors on renvoit faux
+     Sinon on renvoit Vrai*/
     public boolean nonSuicide(int x, int y, String coul) {
         boolean test = true;
         //On stocke l'actuelle liste de groupe
@@ -237,13 +232,13 @@ public class Goban {
         listeGroupes.equals(ancienneListe);
         return test;
     }
-    
-   /*Parametres: entiers x et y, chaine de caractère supposée correct
-   Résultat booléen
-   Si la pose provoque une situation de KO on renvoit faux
-   Sinon on renvoit Vrai*/
-    public boolean nonKO(int x,int y,String coul){
-        boolean test=true;
+
+    /*Parametres: entiers x et y, chaine de caractère supposée correct
+     Résultat booléen
+     Si la pose provoque une situation de KO on renvoit faux
+     Sinon on renvoit Vrai*/
+    public boolean nonKO(int x, int y, String coul) {
+        boolean test = true;
         return test;
     }
 
@@ -309,19 +304,21 @@ public class Goban {
     }
 
     /*Parametres: entiers x et y
-    Résultat booléen
-    Si x et y sont dans [-1,taille] on renvoit faux
-    Si x=-1 et pas y ou le contraire on renvoit faux
-    Sinon on renvoit vrai*/
+     Résultat booléen
+     Si x et y sont dans [-1,taille] on renvoit faux
+     Si x=-1 et pas y ou le contraire on renvoit faux
+     Sinon on renvoit vrai*/
     public boolean estValideCoord(int x, int y) {
         boolean test = true;
         //condition de validité sur x,y 
         if ((x < -1) || (x >= taille) || (y < -1) || (y >= taille)) {
+            System.out.println("Les valeurs de x et y sont en dehors du domaine");
             test = false;
         }
         //condition de validité pour passer son tour
-        if(((x==-1)&&(y!=-1))||((x!=-1)&&(y==1))){
-            test= false;
+        if (((x == -1) && (y != -1)) || ((x != -1) && (y == 1))) {
+            test = false;
+            System.out.println("Il faut mettre x et y tous les deux à -1");
         }
         return test;
     }
@@ -346,7 +343,18 @@ public class Goban {
         return indice;
     }
 
-    //getters
+    //méthode non oeil renvoit vrai si la position n'est pas un oeil.
+    //càd si le groupe qui encercle a pour degré de liberté 0 après placement
+    public boolean nonOeil(int x, int y, String coul) {
+        boolean test = true;
+        return test;
+
+    }
+
+    public void mettreAJourGroupe() {
+    }
+
+//getters
     public Pierre[][] getPlateau() {
         return plateau;
     }
@@ -387,6 +395,5 @@ public class Goban {
     public void setPierreMorteN(int pierreMorteN) {
         this.pierreMorteN = pierreMorteN;
     }
-    
 
 }
