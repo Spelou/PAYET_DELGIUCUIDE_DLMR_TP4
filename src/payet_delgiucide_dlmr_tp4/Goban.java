@@ -87,8 +87,14 @@ public class Goban {
         System.out.println("=======================================");
     }
 
-// méthode qui place la pierre à l'endroit indiqué par l'utilisateur (deux entiers en paramètre) et une couleur 
-// supposés justes et qui met à jour son degré de liberté
+/*Paramètres : entiers x et y et chaîne de caractère coul supposés corrects
+Résultat : void
+Crée une nouvelle Pierre de coordonnées celles rentrées en paramètre, la met vivante, son degré de liberté à 0,son num de groupe au max + 1 
+Met à jour le degré de liberté
+Crée un groupe associé
+Met à jour le degré du groupe
+Ajoute la Pierre au Goban
+*/
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre si case non vide, On attend encore la gestion des suicides...
 
