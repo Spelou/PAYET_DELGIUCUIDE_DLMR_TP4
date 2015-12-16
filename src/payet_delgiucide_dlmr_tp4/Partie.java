@@ -73,7 +73,7 @@ public class Partie {
 
         while (fin) {    //1 while par tour. la partie est finit si fin passe à true
             gob.afficher();
-
+            System.out.println("Au tour des blancs et " + J1.getNom());
 //----tour NOIR
             // vérifier que les données entrées par l'utilisateur sont bonnes 
             boolean test = true; // pour vérifier que x et y sont des choix corrects (pas de suicide, pas de ko, bien dans le goban)
@@ -91,7 +91,7 @@ public class Partie {
                 } else { //les coordonnées sont valides 
                     if ((x == -1) && (y == -1)) {//le joueur rentre -1,-1 pour passer son tour
                         System.out.println("Le joueur passe son tour");
-                        fin=false;
+                        fin = false;
                     } else {//les coordonnées sont différentes de -1,-1 et valides
                         //s'il y a une situation de KO
                         if (!gob.nonKO(x, y, "N")) {
@@ -102,7 +102,8 @@ public class Partie {
                             if (gob.nonSuicide(x, y, "N")) {
                                 //on pose la Pierre
                                 gob.poserPierre(x, y, "N");
-                                gob.mettreAJourGroupe(x, y, "N");
+                                gob.mettreAJourNouvGroupe(x, y, "N");
+                                gob.mettreAJourGroupe("N");
                                 gob.afficher();
                             } else {//on regarde si on est pas en présence d'un oeil
                                 //si ce n'est pas un oeil
@@ -112,7 +113,8 @@ public class Partie {
                                 } else {//si c'est un oeil on place la pierre
                                     test = true;
                                     gob.poserPierre(x, y, "N");
-                                    gob.mettreAJourGroupe(x, y, "N");
+                                    gob.mettreAJourNouvGroupe(x, y, "N");
+                                    gob.mettreAJourGroupe("N");
                                     gob.afficher();
                                 }
 
