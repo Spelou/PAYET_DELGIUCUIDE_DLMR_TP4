@@ -89,45 +89,41 @@ public class Partie {
                     test = true;  //on recommence
                     System.out.println("Erreur: valeur de x hors goban (x>=-1 et x<" + taille + "). Recommencez\nx= ");
                 } else { //les coordonnées sont valides 
-                    //s'il y a une situation de KO
-                    if (!gob.nonKO(x, y, "N")) {
-                        test = true; // on recommence
-                        System.out.println("Situation de KO, recommencez");
-                    } else { //il n'y a pas de KO
-                        //il n'y a pas de suicide
-                        if (gob.nonSuicide(x, y, "N")) {
-                        //on pose la Pierre
-                        gob.poserPierre(x, y,"N");
-                        gob.mettreAJourGroupe();
-                        }
-                        else{//on regarde si on est pas en présence d'un oeil
-                            //si ce n'est pas un oeil
-                            if (gob.nonOeil(x, y, "N")) {
-                                test=true; //on recommence
-                                System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
-                            } else {//si c'est un oeil on place la pierre
-                                test=true;
+                    if ((x == -1) && (y == -1)) {//le joueur rentre -1,-1 pour passer son tour
+                        System.out.println("Le joueur passe son tour");
+                        fin=false;
+                    } else {//les coordonnées sont différentes de -1,-1 et valides
+                        //s'il y a une situation de KO
+                        if (!gob.nonKO(x, y, "N")) {
+                            test = true; // on recommence
+                            System.out.println("Situation de KO, recommencez");
+                        } else { //il n'y a pas de KO
+                            //il n'y a pas de suicide
+                            if (gob.nonSuicide(x, y, "N")) {
+                                //on pose la Pierre
                                 gob.poserPierre(x, y, "N");
-                                gob.mettreAJourGroupe();
-                            }
-                            
-                        }
-                    }
+                                gob.mettreAJourGroupe(x, y, "N");
+                                gob.afficher();
+                            } else {//on regarde si on est pas en présence d'un oeil
+                                //si ce n'est pas un oeil
+                                if (gob.nonOeil(x, y, "N")) {
+                                    test = true; //on recommence
+                                    System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
+                                } else {//si c'est un oeil on place la pierre
+                                    test = true;
+                                    gob.poserPierre(x, y, "N");
+                                    gob.mettreAJourGroupe(x, y, "N");
+                                    gob.afficher();
+                                }
 
+                            }
+                        }
+
+                    }
                 }
             }
 
-            test = true; //remettre à vrai pour rentrer dans la prochaine boucle
-
-            if (x == -1 && y == -1) {  // on regarde si le joueur passe son tour
-                System.out.println("Vous passez votre tour.");
-                fin = false;   // le premier passe son tour. Si le scond passe son tour "fin" n'est pas changer et permet de sortir de la boucle du jeu.
-                // sinon si le second joueur ne passe pas son tour, on met "fin" à vrai pour continuer le jeu.
-            } else {
-                gob.poserPierre(x, y, "N"); // On pose la Pierre. ATTENTION faut encore faire les vérifications dans go...
-            }
-
-//----tour Blanc 
+//----tour BLANC
             System.out.println("Au tour des blancs et " + J2.getNom() + " \n Où voulez vous mettre votre pierre (rentrer x puis y):\n(-1 -1 si vous passez votre tour)\nx= ");
             //prend et vérifie les coordonnées de xxxxxxxxxxxxxxxx  BLANC
             while (test) {
