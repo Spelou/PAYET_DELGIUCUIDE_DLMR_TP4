@@ -70,34 +70,53 @@ public class Partie {
         int x = 0;
         int y = 0;
         boolean fin = true; // pour savoir si la partie et fini
-        boolean test = true; // pour vérifier que x et y sont dans le goban
 
         while (fin) {    //1 while par tour. la partie est finit si fin passe à true
             gob.afficher();
 
 //----tour NOIR
-            System.out.println("Où voulez vous mettre votre pierre (rentrer x puis y) :\n(-1 -1 si vous passez votre tour)\nx= ");
-            //prend et vérifie les coordonnées de xxxxxxxxxx  
+            // vérifier que les données entrées par l'utilisateur sont bonnes 
+            boolean test = true; // pour vérifier que x et y sont des choix corrects (pas de suicide, pas de ko, bien dans le goban)
             while (test) {
+                System.out.println("Où voulez vous mettre votre pierre (rentrer x puis y) :\n(-1 -1 si vous passez votre tour)");
+                System.out.println("x =");
                 test = false; //on pourra sortir
                 x = scan2.nextInt();
-                if (!((x >= -1) && (x < taille))) {
+                System.out.println("y =");
+                y = scan2.nextInt();
+                //si les coordonnées ne sont pas valides 
+                if (!gob.estValideCoord(x, y)) {
                     test = true;  //on recommence
                     System.out.println("Erreur: valeur de x hors goban (x>=-1 et x<" + taille + "). Recommencez\nx= ");
+                } else { //les coordonnées sont valides 
+                    //s'il y a une situation de KO
+                    if (!gob.nonKO(x, y, "N")) {
+                        test = true; // on recommence
+                        System.out.println("Situation de KO, recommencez");
+                    } else { //il n'y a pas de KO
+                        //il n'y a pas de suicide
+                        if (gob.nonSuicide(x, y, "N")) {
+                        //on pose la Pierre
+                        gob.poserPierre(x, y,"N");
+                        gob.mettreAJourGroupe();
+                        }
+                        else{//on regarde si on est pas en présence d'un oeil
+                            //si ce n'est pas un oeil
+                            if (gob.nonOeil(x, y, "N")) {
+                                test=true; //on recommence
+                                System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
+                            } else {//si c'est un oeil on place la pierre
+                                test=true;
+                                gob.poserPierre(x, y, "N");
+                                gob.mettreAJourGroupe();
+                            }
+                            
+                        }
+                    }
+
                 }
             }
 
-            //prend et vérifie les coordonnées de yyyyyyyyyyyyyyyy puis pose ou pas la pierre
-            test = true; //remettre à vrai pour rentrer dans la prochaine boucle
-            while (test) {
-                test = false; //on pourra sortir
-                System.out.println("y= ");
-                y = scan2.nextInt();
-                if (!((y >= -1) && (y < taille))) {
-                    test = true;  //on recommence
-                    System.out.println("Erreur: valeur de y hors goban (y>=-1 et y<" + taille + "). Recommencez");
-                }
-            }
             test = true; //remettre à vrai pour rentrer dans la prochaine boucle
 
             if (x == -1 && y == -1) {  // on regarde si le joueur passe son tour
