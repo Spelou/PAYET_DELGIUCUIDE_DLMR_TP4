@@ -117,25 +117,25 @@ public class Goban {
         int compt = 0;   //compte les libertes
 
         if ((x + 1) < taille) {
-            if (plateau[x + 1][y].getEtat() == -1) {
+            if ((plateau[x + 1][y].getEtat() == -1)||(plateau[x + 1][y].getEtat() == 1)) {
                 compt++;
             }
         }
 
         if ((y + 1) < taille) {
-            if (plateau[x][y + 1].getEtat() == -1) {
+            if ((plateau[x][y + 1].getEtat() == -1)||(plateau[x][y + 1].getEtat() == 1)) {
                 compt++;
             }
         }
 
         if ((x - 1) >= 0) {
-            if (plateau[x - 1][y].getEtat() == -1) {
+            if ((plateau[x - 1][y].getEtat() == -1)||(plateau[x - 1][y].getEtat() == 1)) {
                 compt++;
             }
         }
 
         if ((y - 1) >= 0) {
-            if (plateau[x][y - 1].getEtat() == -1) {
+            if ((plateau[x][y - 1].getEtat() == -1)||(plateau[x][y - 1].getEtat() == 1)) {
                 compt++;
             }
         }
