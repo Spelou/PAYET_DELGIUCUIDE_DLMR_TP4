@@ -267,6 +267,8 @@ public class Goban {
         if ((!estVide(x - 1, y)) && ((x - 1) >= 0)) {
             if ((nouvGroupe.getCouleur().equals(plateau[x - 1][y].getCouleur()))) {
                 int numeroPierreAdjacente = indiceGroupe(plateau[x - 1][y].getNumGroupe());
+                String coulAncienGroupe=listeGroupes.get(numeroPierreAdjacente).getCouleur();
+                String coulNouvGroupe=nouvGroupe.getCouleur();
                 nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
                 listeGroupes.remove(numeroPierreAdjacente);
             }
