@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import org.junit.Rule;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
@@ -39,12 +40,17 @@ public class PartieTest {
         Joueur j2 = new Joueur("Quentin", "B");
         Goban gob = new Goban(19);
         Partie maPartie = new Partie(j1, j2, gob, 19);
-        systemInMock.provideLines("1\n", "3\n", "1\n", "4\n");
-        maPartie.NouvellePartie();
+        /* systemInMock.provideLines("1\n", "3\n", "1\n", "4\n");
+        maPartie.NouvellePartie();*/
 
-        //test si on rentre un string à la place d'un int
-        systemInMock.provideLines("a\n", "2\n", "1\n", "4\n");
-        maPartie.NouvellePartie();
+        //test si on rentre un string à la place d'un int  //On attend InputMismatchException
+        try {
+            systemInMock.provideLines("a\n", "2\n", "1\n", "4\n");
+            maPartie.NouvellePartie();
+        } catch (InputMismatchException e) {
+            e.getCause();
+        }
+                
         
         /* Cette méthode d'utilisation d'un robot ne semble pas fonctionner
          try {
