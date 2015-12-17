@@ -260,6 +260,8 @@ public class Goban {
     public void mettreAJourNouvGroupe(int x, int y, String coul) {
         //récupération du dernier groupe crée le nouveau
         Groupe nouvGroupe = new Groupe();
+        int max=maxNumGroupe();
+        int essai=indiceGroupe(maxNumGroupe());
         nouvGroupe = listeGroupes.get(indiceGroupe(maxNumGroupe()));
         //Parcours des groupes adjacents en commençant par la droite
         if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x - 1][y].getCouleur()))) {
