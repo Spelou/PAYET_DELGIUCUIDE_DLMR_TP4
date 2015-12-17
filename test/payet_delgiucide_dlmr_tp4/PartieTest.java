@@ -68,10 +68,5 @@ public class PartieTest {
     /**
      * Test d'une prise en compte d'une entrée par System.in
      */
-    @Test
-    public void testPartieBidon() {
-        systemInMock.provideText("1\n2\n");
-        assertEquals(3, Partie.sumOfNumbersFromSystemIn());
-    }
 
 }
