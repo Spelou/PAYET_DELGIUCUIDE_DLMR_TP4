@@ -231,7 +231,7 @@ public class GobanTest {
         monGobanCrash.getPlateau()[6][5] = pierreN1;
         monGobanCrash.getPlateau()[5][5] = pierreB4;
 
-        monGobanCrash.mettreAJourGroupe(5, 5, "B");
+        monGobanCrash.mettreAJourNouvGroupe(5, 5, "B");
 
         // vérification des degrés de liberté des pierres 
         assertEquals(pierreB1.getLiberte(), 3);
