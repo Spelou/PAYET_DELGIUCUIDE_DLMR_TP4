@@ -175,17 +175,9 @@ public class Partie {
                     }
                 }
             }
-        gob.afficher();
-        System.out.println("Vous avez arrêté la partie, libre à vous de comptez les points.\n En espérant que vous vous êtes amusé, merci d'avoir choisi notre jeu.");
-    }
+            gob.afficher();
+            System.out.println("Vous avez arrêté la partie, libre à vous de comptez les points.\n En espérant que vous vous êtes amusé, merci d'avoir choisi notre jeu.");
+        }
 
-    /* 
-     Méthode de test de la librairie system rules
-     */
-    public static int sumOfNumbersFromSystemIn() {
-        Scanner scanner = new Scanner(System.in);
-        int firstSummand = scanner.nextInt();
-        int secondSummand = scanner.nextInt();
-        return firstSummand + secondSummand;
     }
 }
