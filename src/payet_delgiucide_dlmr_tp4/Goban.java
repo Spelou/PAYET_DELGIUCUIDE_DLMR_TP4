@@ -165,7 +165,7 @@ public class Goban {
         for (int i = 0; i < g.getListePierres().size(); i++) {
             int a = g.getListePierres().get(i).getX();
             int b = g.getListePierres().get(i).getY();
-            if ((0 <= a + 1) && (a + 1 <= this.taille)) {
+            if ((0 <= a + 1) && (a + 1 < this.taille)) {
                 if (plateau[a + 1][b].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a + 1][b] == 0) {
                         gobanVirtuel[a + 1][b] = 1;
@@ -173,7 +173,7 @@ public class Goban {
                     }
                 }
             }
-            if ((0 <= a - 1) && (a - 1 <= this.taille)) {
+            if ((0 <= a - 1) && (a - 1 < this.taille)) {
                 if (plateau[a - 1][b].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a - 1][b] == 0) {
                         gobanVirtuel[a - 1][b] = 1;
@@ -182,7 +182,7 @@ public class Goban {
                 }
             }
 
-            if ((0 <= b + 1) && (b + 1 <= this.taille)) {
+            if ((0 <= b + 1) && (b + 1 < this.taille)) {
                 if (plateau[a][b + 1].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a][b + 1] == 0) {
                         gobanVirtuel[a][b + 1] = 1;
@@ -191,7 +191,7 @@ public class Goban {
                 }
             }
 
-            if ((0 <= b - 1) && (b - 1 <= this.taille)) {
+            if ((0 <= b - 1) && (b - 1 < this.taille)) {
                 if (plateau[a][b - 1].getCouleur().equalsIgnoreCase("O")) {
                     if (gobanVirtuel[a][b - 1] == 0) {
                         gobanVirtuel[a][b - 1] = 1;
