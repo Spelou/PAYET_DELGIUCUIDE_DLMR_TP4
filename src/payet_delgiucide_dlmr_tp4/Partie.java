@@ -70,9 +70,9 @@ public class Partie {
         int x = 0;
         int y = 0;
         boolean fin = true; // pour savoir si la partie et fini
-
+         gob.afficher();// 1er affichage
         while (fin) {    //1 while par tour. la partie est finit si fin passe à true
-            gob.afficher();
+           
             System.out.println("Au tour des noirs et " + J1.getNom());
 //----tour NOIR
             // vérifier que les données entrées par l'utilisateur sont bonnes 
@@ -93,34 +93,38 @@ public class Partie {
                         System.out.println("Le joueur passe son tour");
                         fin = false;
                     } else {//les coordonnées sont différentes de -1,-1 et valides
-                        //s'il y a une situation de KO
-                        if (!gob.nonKO(x, y, "N")) {
-                            test = true; // on recommence
-                            System.out.println("Situation de KO, recommencez");
-                        } else { //il n'y a pas de KO
-                            //il n'y a pas de suicide
-                            if (/*gob.nonSuicide(x, y, "N")*/true) {
-                                //on pose la Pierre
-                                gob.poserPierre(x, y, "N");
-                                gob.mettreAJourNouvGroupe(x, y, "N");
-                                gob.mettreAJourGroupe("N");
-                                gob.afficher();
-                            } else {//on regarde si on est pas en présence d'un oeil
-                                //si ce n'est pas un oeil
-                                if (gob.nonOeil(x, y, "N")) {
-                                    test = true; //on recommence
-                                    System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
-                                } else {//si c'est un oeil on place la pierre
-                                    test = true;
+                        if (gob.estVide(x, y)) {//si la case est vide
+                            if (!gob.nonKO(x, y, "N")) {//s'il y a une situation de KO
+                                test = true; // on recommence
+                                System.out.println("Situation de KO, recommencez");
+                            } else { //il n'y a pas de KO
+                                //il n'y a pas de suicide
+                                if (/*gob.nonSuicide(x, y, "N")*/true) {
+                                    //on pose la Pierre
                                     gob.poserPierre(x, y, "N");
                                     gob.mettreAJourNouvGroupe(x, y, "N");
                                     gob.mettreAJourGroupe("N");
                                     gob.afficher();
-                                }
+                                } else {//on regarde si on est pas en présence d'un oeil
+                                    //si ce n'est pas un oeil
+                                    if (gob.nonOeil(x, y, "N")) {
+                                        test = true; //on recommence
+                                        System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
+                                    } else {//si c'est un oeil on place la pierre
+                                        test = true;
+                                        gob.poserPierre(x, y, "N");
+                                        gob.mettreAJourNouvGroupe(x, y, "N");
+                                        gob.mettreAJourGroupe("N");
+                                        gob.afficher();
+                                    }
 
+                                }
                             }
                         }
-
+                        else{//la case est occupée 
+                            test = true; // on recommence
+                            System.out.println("La case est occupée, recommencez");
+                        }
                     }
                 }
             }
@@ -129,7 +133,7 @@ public class Partie {
             // vérifier que les données entrées par l'utilisateur sont bonnes 
             test = true; // pour vérifier que x et y sont des choix corrects (pas de suicide, pas de ko, bien dans le goban)
             while (test) {
-                System.out.println("Où voulez vous mettre votre pierre (rentrer x puis y) :\n(-1 -1 si vous passez votre tour)");
+                System.out.println("Où voulez vous mettre votre pierre (rentrez x puis y) :\n(-1 -1 si vous passez votre tour)");
                 System.out.println("x =");
                 test = false; //on pourra sortir
                 x = scan2.nextInt();
@@ -144,39 +148,44 @@ public class Partie {
                         System.out.println("Le joueur passe son tour");
                         fin = false;
                     } else {//les coordonnées sont différentes de -1,-1 et valides
-                        //s'il y a une situation de KO
-                        if (!gob.nonKO(x, y, "B")) {
-                            test = true; // on recommence
-                            System.out.println("Situation de KO, recommencez");
-                        } else { //il n'y a pas de KO
-                            //il n'y a pas de suicide
-                            if (/*gob.nonSuicide(x, y, "N")*/true) {
-                                //on pose la Pierre
-                                gob.poserPierre(x, y, "B");
-                                gob.mettreAJourNouvGroupe(x, y, "B");
-                                gob.mettreAJourGroupe("B");
-                                gob.afficher();
-                            } else {//on regarde si on est pas en présence d'un oeil
-                                //si ce n'est pas un oeil
-                                if (gob.nonOeil(x, y, "B")) {
-                                    test = true; //on recommence
-                                    System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
-                                } else {//si c'est un oeil on place la pierre
-                                    test = true;
+                        if (gob.estVide(x, y)) {//si la case est vide
+                            if (!gob.nonKO(x, y, "B")) {//s'il y a une situation de KO
+                                test = true; // on recommence
+                                System.out.println("Situation de KO, recommencez");
+                            } else { //il n'y a pas de KO
+                                //il n'y a pas de suicide
+                                if (/*gob.nonSuicide(x, y, "N")*/true) {
+                                    //on pose la Pierre
                                     gob.poserPierre(x, y, "B");
                                     gob.mettreAJourNouvGroupe(x, y, "B");
                                     gob.mettreAJourGroupe("B");
                                     gob.afficher();
-                                }
+                                } else {//on regarde si on est pas en présence d'un oeil
+                                    //si ce n'est pas un oeil
+                                    if (gob.nonOeil(x, y, "B")) {
+                                        test = true; //on recommence
+                                        System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
+                                    } else {//si c'est un oeil on place la pierre
+                                        test = true;
+                                        gob.poserPierre(x, y, "B");
+                                        gob.mettreAJourNouvGroupe(x, y, "B");
+                                        gob.mettreAJourGroupe("B");
+                                        gob.afficher();
+                                    }
 
+                                }
                             }
                         }
-
+                        else{//la case est occupée 
+                            test = true; // on recommence
+                            System.out.println("La case est occupée, recommencez");
+                        }
                     }
                 }
             }
-            gob.afficher();
+            
         }
         System.out.println("Vous avez arrêté la partie, libre à vous de comptez les points.\n En espérant que vous vous êtes amusé, merci d'avoir choisi notre jeu.");
+        gob.afficher();
     }
 }
