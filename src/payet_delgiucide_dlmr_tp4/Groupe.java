@@ -20,6 +20,10 @@ public class Groupe {
     private String couleur; //idem que pour celle de pierre (N ou B)
     private ArrayList<Pierre> listePierres;
 
+    public Groupe(){
+        
+    }
+    
     public Groupe(int numGroupe, Pierre premierePierre) {
           
         this.numGroupe = numGroupe;
@@ -57,7 +61,13 @@ public class Groupe {
     }
 
     public void changerEtat(int etat) {
-
+        //On passe l'état du groupe à etat
+        this.etat=etat;
+        //de même pour les pierres
+        for(int j=0;j<listePierres.size();j++){
+            listePierres.get(j).setEtat(etat);
+        }
+        
     }
 
     public void afficherliste() {

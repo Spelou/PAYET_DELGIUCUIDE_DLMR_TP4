@@ -18,8 +18,8 @@ public class Goban {
     private Pierre[][] plateau; //plateau de jeu, matrice de pierre
     private ArrayList<Groupe> listeGroupes;
     private int taille;
-    private int pierreMorteB;
-    private int pierreMorteN;
+    private int pierreCaptureesB;
+    private int pierreCaptureesN;
 
 // constructeur de Goban 
 //taille en paramètre supposée juste, intialise toutes les pierres à vide, initialise les pierres mortes à 0
@@ -39,8 +39,8 @@ public class Goban {
             }
         }
         //initialisation des pierres mortes
-        pierreMorteB = 0;
-        pierreMorteN = 0;
+        pierreCaptureesB = 0;
+        pierreCaptureesN = 0;
         //liste Groupe
         listeGroupes = new ArrayList<Groupe>();
     }
@@ -87,24 +87,24 @@ public class Goban {
         System.out.println("=======================================");
     }
 
-/*Paramètres : entiers x et y et chaîne de caractère coul supposés corrects
-Résultat : void
-Crée une nouvelle Pierre de coordonnées celles rentrées en paramètre, la met vivante, son degré de liberté à 0,son num de groupe au max + 1 
-Met à jour le degré de liberté
-Crée un groupe associé
-Met à jour le degré du groupe
-Ajoute la Pierre au Goban
-*/
+    /*Paramètres : entiers x et y et chaîne de caractère coul supposés corrects
+     Résultat : void
+     Crée une nouvelle Pierre de coordonnées celles rentrées en paramètre, la met vivante, son degré de liberté à 0,son num de groupe au max + 1 
+     Met à jour le degré de liberté
+     Crée un groupe associé
+     Met à jour le degré du groupe
+     Ajoute la Pierre au Goban
+     */
     public void poserPierre(int x, int y, String coul) {
         //ajout de la pierre si case non vide, On attend encore la gestion des suicides...
 
         if (estVide(x, y)) { //vérification case vide
-            Pierre nouvPierre= new Pierre(coul,2,0,maxNumGroupe()+1,x,y);
-            nouvPierre.setLiberte(degreLib(x,y));
-            Groupe nouvGroupe= new Groupe(maxNumGroupe()+1,nouvPierre);
+            Pierre nouvPierre = new Pierre(coul, 2, 0, maxNumGroupe() + 1, x, y);
+            nouvPierre.setLiberte(degreLib(x, y));
+            Groupe nouvGroupe = new Groupe(maxNumGroupe() + 1, nouvPierre);
             nouvGroupe.setLiberte(this.calculLiberte(nouvGroupe));
             listeGroupes.add(nouvGroupe);
-            plateau[x][y]=nouvPierre;
+            plateau[x][y] = nouvPierre;
         } else {
             System.out.println("Erreur méthode poser Pierre: la case est déjà occupé.");
         }
@@ -205,15 +205,18 @@ Ajoute la Pierre au Goban
 
     }
 
-    /*Parametres: entiers x et y supposés corrects
+    /*Parametres: entiers x et y 
      Résultat booléen
      Si la case est occupée on renvoit faux
+     Si x et y sont en dehors de la bande on renvoit vrai
      Sinon on renvoit Vrai*/
     public boolean estVide(int x, int y) {
         boolean test = true;
         //vérification si la pierre est morte ou non, si elle est prise on peut toujours jouer dessus dans le cas de l'oeil
-        if (plateau[x][y].getEtat() == 2 || plateau[x][y].getEtat() == 0) {
-            test = false;
+        if ((x < 0) || (x >= taille) || (y < 0) || (y >= taille)) {
+            if (plateau[x][y].getEtat() == 2 || plateau[x][y].getEtat() == 0) {
+                test = false;
+            }
         }
         return test;
     }
@@ -229,7 +232,7 @@ Ajoute la Pierre au Goban
         ArrayList<Groupe> ancienneListe = new ArrayList<>();
         ancienneListe.equals(listeGroupes);
         //On met à jour les groupes avec la nouvelle position
-        mettreAJourGroupe(x, y, coul);
+        mettreAJourNouvGroupe(x, y, coul);
         //si la pierre ajoutée provoque un suicide du nouveau groupe associé alors on recopie l'ancienne liste
         //sinon on supprime la pierre de 
         if (listeGroupes.get(listeGroupes.size() - 1).getEtat() == 0) {
@@ -248,18 +251,17 @@ Ajoute la Pierre au Goban
         return test;
     }
 
-//mettre à jour groupe méthode qui prend en argument deux entiers et une couleur et qui regarde si 
-//la pierre appartient à un ancien groupe, fait la jointure de 2 groupes, ou forme un groupe seul (les paramètres sont considérés comme juste
-    public void mettreAJourGroupe(int x, int y, String coul) {
-        //récupération de la pierre associée
-        Pierre nouvPierre = plateau[x][y];
-        //initialisation du groupe associé à la pierre
-        Groupe nouvGroupe = new Groupe(maxNumGroupe() + 1, nouvPierre);
-        nouvPierre.setNumGroupe(nouvGroupe.getNumGroupe());
-        //ajouter le groupe à la liste
-        listeGroupes.add(nouvGroupe);
-        //il faut regarder les groupes aux alentours
-        // on regarde s'il y a un groupe à gauche de la même couleur, si oui on fusionne et on supprime l'ancien
+    /*Paramètre : entier x, y chaine de caractère coul supposés valides
+     Résultat : void
+     La méthode regarde autout de la nouvelle Pierre (qui est maintenant un groupe) s'il y a d'autres groupes de la même couleur
+     Si oui on les fusionne
+     Le dernier groupe crée a pour indice le max
+     */
+    public void mettreAJourNouvGroupe(int x, int y, String coul) {
+        //récupération du dernier groupe crée le nouveau
+        Groupe nouvGroupe = new Groupe();
+        nouvGroupe = listeGroupes.get(indiceGroupe(maxNumGroupe()));
+        //Parcours des groupes adjacents en commençant par la droite
         if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x - 1][y].getCouleur()))) {
             int numeroPierreAdjacente = indiceGroupe(plateau[x - 1][y].getNumGroupe());
             nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
@@ -286,7 +288,8 @@ Ajoute la Pierre au Goban
             //on supprime le groupe initatialment adjacent
             listeGroupes.remove(numeroPierreAdjacente);
         }
-
+        //mise à jour du degré de liberté du groupe
+        nouvGroupe.setLiberte(calculLiberte(nouvGroupe));
     }
 
     //méthode qui met à jour le deg de la pierre si on l'ajoute à l'emplacement x,y
@@ -357,7 +360,31 @@ Ajoute la Pierre au Goban
 
     }
 
-    public void mettreAJourGroupe() {
+    
+    /*Paramètre : void
+    Résultat : void
+    Parcours tous les groupes, regarde leur degré de liberté de liberté
+    S'il est nul on passe toutes les Pierres en "prises"
+    */
+    public void mettreAJourGroupe(String coul) {
+        for(int i=0;i<listeGroupes.size();i++){
+            listeGroupes.get(i).setLiberte(calculLiberte(listeGroupes.get(i)));
+            if(listeGroupes.get(i).getLiberte()==0){
+                listeGroupes.get(i).changerEtat(1);
+                if(coul.equals("N")){
+                     pierreCaptureesB=pierreCaptureesB+listeGroupes.get(i).getListePierres().size();
+                }
+                if(coul.equals("B")){
+                     pierreCaptureesN=pierreCaptureesN+listeGroupes.get(i).getListePierres().size();
+                }
+                
+               
+            }
+        }
+        
+        
+        
+        
     }
 
 //getters
@@ -373,12 +400,12 @@ Ajoute la Pierre au Goban
         return taille;
     }
 
-    public int getPierreMorteB() {
-        return pierreMorteB;
+    public int getPierreCaptureesB() {
+        return pierreCaptureesB;
     }
 
-    public int getPierreMorteN() {
-        return pierreMorteN;
+    public int getPierreCaptureesN() {
+        return pierreCaptureesN;
     }
 
     //setters
@@ -394,12 +421,12 @@ Ajoute la Pierre au Goban
         this.taille = taille;
     }
 
-    public void setPierreMorteB(int pierreMorteB) {
-        this.pierreMorteB = pierreMorteB;
+    public void setPierreCaptureesB(int pierreMorteB) {
+        this.pierreCaptureesB = pierreMorteB;
     }
 
-    public void setPierreMorteN(int pierreMorteN) {
-        this.pierreMorteN = pierreMorteN;
+    public void setPierreCaptureesN(int pierreMorteN) {
+        this.pierreCaptureesN = pierreMorteN;
     }
 
 }

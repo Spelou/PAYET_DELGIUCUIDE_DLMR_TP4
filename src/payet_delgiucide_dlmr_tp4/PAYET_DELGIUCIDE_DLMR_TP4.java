@@ -22,14 +22,11 @@ public class PAYET_DELGIUCIDE_DLMR_TP4 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        /*
+        
         System.out.println("Bienvenue dans le jeu de go, création du Goban");
-        FenetreT fen =new FenetreT();
         Partie laPartie = new Partie();
         laPartie.NouvellePartie();
-        */
-        Goban gob=new Goban(19);
-        System.out.println(gob.estValideCoord(-1,-1));
+       
         
 }
 }
