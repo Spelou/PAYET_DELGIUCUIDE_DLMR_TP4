@@ -99,7 +99,7 @@ public class Partie {
                             System.out.println("Situation de KO, recommencez");
                         } else { //il n'y a pas de KO
                             //il n'y a pas de suicide
-                            if (gob.nonSuicide(x, y, "N")) {
+                            if (/*gob.nonSuicide(x, y, "N")*/true) {
                                 //on pose la Pierre
                                 gob.poserPierre(x, y, "N");
                                 gob.mettreAJourNouvGroupe(x, y, "N");
@@ -145,27 +145,27 @@ public class Partie {
                         fin = false;
                     } else {//les coordonnées sont différentes de -1,-1 et valides
                         //s'il y a une situation de KO
-                        if (!gob.nonKO(x, y, "N")) {
+                        if (!gob.nonKO(x, y, "B")) {
                             test = true; // on recommence
                             System.out.println("Situation de KO, recommencez");
                         } else { //il n'y a pas de KO
                             //il n'y a pas de suicide
-                            if (gob.nonSuicide(x, y, "N")) {
+                            if (/*gob.nonSuicide(x, y, "N")*/true) {
                                 //on pose la Pierre
-                                gob.poserPierre(x, y, "N");
-                                gob.mettreAJourNouvGroupe(x, y, "N");
-                                gob.mettreAJourGroupe("N");
+                                gob.poserPierre(x, y, "B");
+                                gob.mettreAJourNouvGroupe(x, y, "B");
+                                gob.mettreAJourGroupe("B");
                                 gob.afficher();
                             } else {//on regarde si on est pas en présence d'un oeil
                                 //si ce n'est pas un oeil
-                                if (gob.nonOeil(x, y, "N")) {
+                                if (gob.nonOeil(x, y, "B")) {
                                     test = true; //on recommence
                                     System.out.println("Impossible de poser la pierre ici, suicide, recommencez");
                                 } else {//si c'est un oeil on place la pierre
                                     test = true;
-                                    gob.poserPierre(x, y, "N");
-                                    gob.mettreAJourNouvGroupe(x, y, "N");
-                                    gob.mettreAJourGroupe("N");
+                                    gob.poserPierre(x, y, "B");
+                                    gob.mettreAJourNouvGroupe(x, y, "B");
+                                    gob.mettreAJourGroupe("B");
                                     gob.afficher();
                                 }
 
