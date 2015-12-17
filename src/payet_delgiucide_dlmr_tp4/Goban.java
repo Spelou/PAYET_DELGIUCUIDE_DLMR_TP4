@@ -325,7 +325,7 @@ public class Goban {
             test = false;
         }
         //condition de validité pour passer son tour
-        if (((x == -1) && (y != -1)) || ((x != -1) && (y == 1))) {
+        if (((x == -1) && (y != -1)) || ((x != -1) && (y == -1))) {
             test = false;
             System.out.println("Il faut mettre x et y tous les deux à -1");
         }
