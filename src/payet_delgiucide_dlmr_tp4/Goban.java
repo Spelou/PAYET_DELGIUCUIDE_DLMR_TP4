@@ -213,7 +213,7 @@ public class Goban {
     public boolean estVide(int x, int y) {
         boolean test = true;
         //vérification si la pierre est morte ou non, si elle est prise on peut toujours jouer dessus dans le cas de l'oeil
-        if ((x < 0) || (x >= taille) || (y < 0) || (y >= taille)) {
+        if ((x >= 0) && (x < taille) && (y >= 0) && (y < taille)) {
             if (plateau[x][y].getEtat() == 2 || plateau[x][y].getEtat() == 0) {
                 test = false;
             }
@@ -260,35 +260,43 @@ public class Goban {
     public void mettreAJourNouvGroupe(int x, int y, String coul) {
         //récupération du dernier groupe crée le nouveau
         Groupe nouvGroupe = new Groupe();
-        int max=maxNumGroupe();
-        int essai=indiceGroupe(maxNumGroupe());
+        int max = maxNumGroupe();
+        int essai = indiceGroupe(maxNumGroupe());
         nouvGroupe = listeGroupes.get(indiceGroupe(maxNumGroupe()));
         //Parcours des groupes adjacents en commençant par la droite
-        if ((!estVide(x - 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x - 1][y].getCouleur()))) {
-            int numeroPierreAdjacente = indiceGroupe(plateau[x - 1][y].getNumGroupe());
-            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
-            listeGroupes.remove(numeroPierreAdjacente);
+        if ((!estVide(x - 1, y)) && ((x - 1) >= 0)) {
+            if ((nouvGroupe.getCouleur().equals(plateau[x - 1][y].getCouleur()))) {
+                int numeroPierreAdjacente = indiceGroupe(plateau[x - 1][y].getNumGroupe());
+                nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
+                listeGroupes.remove(numeroPierreAdjacente);
+            }
         }
         //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne et on supprime l'ancien
-        if ((!estVide(x, y + 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y + 1].getCouleur()))) {
-            int numeroPierreAdjacente = indiceGroupe(plateau[x][y + 1].getNumGroupe());
-            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
-            listeGroupes.remove(numeroPierreAdjacente);
+        if ((!estVide(x, y + 1)) && ((y + 1) < taille)) {
+            if (nouvGroupe.getCouleur().equals(plateau[x][y + 1].getCouleur())) {
+                int numeroPierreAdjacente = indiceGroupe(plateau[x][y + 1].getNumGroupe());
+                nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
+                listeGroupes.remove(numeroPierreAdjacente);
+            }
         }
         //de même on regarde s'il y a un groupe à droite de la même couleur, si oui on fusionne et on supprime l'ancien
-        if ((!estVide(x + 1, y)) && (nouvGroupe.getCouleur().equals(plateau[x + 1][y].getCouleur()))) {
-            int numeroPierreAdjacente = indiceGroupe(plateau[x + 1][y].getNumGroupe());
-            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
-            listeGroupes.remove(numeroPierreAdjacente);
+        if ((!estVide(x + 1, y)) && ((x + 1) < taille)) {
+            if (nouvGroupe.getCouleur().equals(plateau[x + 1][y].getCouleur())) {
+                int numeroPierreAdjacente = indiceGroupe(plateau[x + 1][y].getNumGroupe());
+                nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
+                listeGroupes.remove(numeroPierreAdjacente);
+            }
         }
         //de même on regarde s'il y a un groupe au dessus de la même couleur, si oui on fusionne et on supprime l'ancien
-        if ((!estVide(x, y - 1)) && (nouvGroupe.getCouleur().equals(plateau[x][y - 1].getCouleur()))) {
-            //récupération de l'indice dans le tableau de la pierre adjacente
-            int numeroPierreAdjacente = indiceGroupe(plateau[x][y - 1].getNumGroupe());
-            //fusion des groupes nouvGroupe et le groupe de la pierre adjacente
-            nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
-            //on supprime le groupe initatialment adjacent
-            listeGroupes.remove(numeroPierreAdjacente);
+        if ((!estVide(x, y - 1)) && ((y - 1) >= 0)) {
+            if (nouvGroupe.getCouleur().equals(plateau[x][y - 1].getCouleur())) {
+                //récupération de l'indice dans le tableau de la pierre adjacente
+                int numeroPierreAdjacente = indiceGroupe(plateau[x][y - 1].getNumGroupe());
+                //fusion des groupes nouvGroupe et le groupe de la pierre adjacente
+                nouvGroupe.fusion(listeGroupes.get(numeroPierreAdjacente));
+                //on supprime le groupe initatialment adjacent
+                listeGroupes.remove(numeroPierreAdjacente);
+            }
         }
         //mise à jour du degré de liberté du groupe
         nouvGroupe.setLiberte(calculLiberte(nouvGroupe));
@@ -362,31 +370,26 @@ public class Goban {
 
     }
 
-    
     /*Paramètre : void
-    Résultat : void
-    Parcours tous les groupes, regarde leur degré de liberté de liberté
-    S'il est nul on passe toutes les Pierres en "prises"
-    */
+     Résultat : void
+     Parcours tous les groupes, regarde leur degré de liberté de liberté
+     S'il est nul on passe toutes les Pierres en "prises"
+     */
     public void mettreAJourGroupe(String coul) {
-        for(int i=0;i<listeGroupes.size();i++){
+        for (int i = 0; i < listeGroupes.size(); i++) {
             listeGroupes.get(i).setLiberte(calculLiberte(listeGroupes.get(i)));
-            if(listeGroupes.get(i).getLiberte()==0){
+            if (listeGroupes.get(i).getLiberte() == 0) {
                 listeGroupes.get(i).changerEtat(1);
-                if(coul.equals("N")){
-                     pierreCaptureesB=pierreCaptureesB+listeGroupes.get(i).getListePierres().size();
+                if (coul.equals("N")) {
+                    pierreCaptureesB = pierreCaptureesB + listeGroupes.get(i).getListePierres().size();
                 }
-                if(coul.equals("B")){
-                     pierreCaptureesN=pierreCaptureesN+listeGroupes.get(i).getListePierres().size();
+                if (coul.equals("B")) {
+                    pierreCaptureesN = pierreCaptureesN + listeGroupes.get(i).getListePierres().size();
                 }
-                
-               
+
             }
         }
-        
-        
-        
-        
+
     }
 
 //getters
