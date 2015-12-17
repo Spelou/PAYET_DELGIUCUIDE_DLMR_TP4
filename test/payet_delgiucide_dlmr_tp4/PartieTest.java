@@ -42,6 +42,10 @@ public class PartieTest {
         systemInMock.provideLines("1\n", "3\n", "1\n", "4\n");
         maPartie.NouvellePartie();
 
+        //test si on rentre un string à la place d'un int
+        systemInMock.provideLines("a\n", "2\n", "1\n", "4\n");
+        maPartie.NouvellePartie();
+        
         /* Cette méthode d'utilisation d'un robot ne semble pas fonctionner
          try {
          Robot robot = new Robot();
