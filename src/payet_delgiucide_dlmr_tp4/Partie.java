@@ -73,12 +73,12 @@ public class Partie {
 
         while (fin) {    //1 while par tour. la partie est finit si fin passe à true
             gob.afficher();
-            System.out.println("Au tour des blancs et " + J1.getNom());
+            System.out.println("Au tour des noirs et " + J1.getNom());
 //----tour NOIR
             // vérifier que les données entrées par l'utilisateur sont bonnes 
             boolean test = true; // pour vérifier que x et y sont des choix corrects (pas de suicide, pas de ko, bien dans le goban)
             while (test) {
-                System.out.println("Où voulez vous mettre votre pierre (rentrer x puis y) :\n(-1 -1 si vous passez votre tour)");
+                System.out.println("Où voulez vous mettre votre pierre (rentrez x puis y) :\n(-1 -1 si vous passez votre tour)");
                 System.out.println("x =");
                 test = false; //on pourra sortir
                 x = scan2.nextInt();
